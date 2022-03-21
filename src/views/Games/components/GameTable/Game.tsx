@@ -10,7 +10,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 0 12px 12px;
+  padding: 0 12px;
   width: 100%;
   justify-content: space-between;
 
@@ -95,7 +95,15 @@ const ChainAddress: React.FC<{ chain: ChainProps[] }> = ({ chain }) => (
   </FlexButton>
 )
 
-const Game: React.FunctionComponent<GameProps> = ({ title, subtitle, logo, votes, cta, chain }) => {
+const Game: React.FunctionComponent<GameProps & { actionPanelOpen: boolean }> = ({
+  title,
+  subtitle,
+  logo,
+  votes,
+  cta,
+  chain,
+  actionPanelOpen,
+}) => {
   const { isMobile, isTablet } = useMatchBreakpoints()
   const [base64, setBase64] = useState('data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=')
   const [imgLoading, setImgLoading] = useState(true)
@@ -159,6 +167,13 @@ const Game: React.FunctionComponent<GameProps> = ({ title, subtitle, logo, votes
             <Button className="externalLinks" as="a" variant="secondary" href={cta} scale="sm">
               Find out more
             </Button>
+          </Flex>
+          <Flex justifyContent="center" mt="30px" mb="10px" style={{ width: '100%' }}>
+            {!actionPanelOpen ? (
+              <ChevronDownIcon width={25} color="tertiary" />
+            ) : (
+              <ChevronUpIcon width={25} color="tertiary" />
+            )}
           </Flex>
         </>
       )

@@ -13,11 +13,13 @@ export interface RowProps {
 const WORDS_LIMIT = 10
 
 const CellInner = styled.div`
-  padding: 24px 8px 24px 0px;
+  padding: 24px 8px 0 0px;
   display: flex;
   width: 100%;
   align-items: center;
-  padding-right: 8px;
+  ${({ theme }) => theme.mediaQueries.sm} {
+    padding-bottom: 24px;
+  }
   ${({ theme }) => theme.mediaQueries.xl} {
     padding-right: 32px;
   }
@@ -60,7 +62,11 @@ const Row: React.FunctionComponent<
         <td>
           <Flex alignItems="center" justifyContent="space-between" width="100%">
             <CellInner>
-              <Game {...game} subtitle={`${TruncateText(game.subtitle, WORDS_LIMIT)}...`} />
+              <Game
+                {...game}
+                subtitle={`${TruncateText(game.subtitle, WORDS_LIMIT)}...`}
+                actionPanelOpen={showDescription}
+              />
             </CellInner>
           </Flex>
         </td>
