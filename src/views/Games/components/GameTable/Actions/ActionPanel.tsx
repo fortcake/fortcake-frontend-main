@@ -39,17 +39,26 @@ const Container = styled.div<{ expanded }>`
   display: flex;
   width: 100%;
   flex-direction: column-reverse;
-  padding: 60px 32px;
+  padding: 40px 12px;
   ${({ theme }) => theme.mediaQueries.lg} {
     flex-direction: row;
     padding: 60px 32px;
   }
 `
 
+const StyledText = styled(Text)`
+  min-height: 140px;
+  justify-self: center;
+  ${({ theme }) => theme.mediaQueries.md} {
+    min-height: initial;
+    justify-self: initial;
+  }
+`
+
 const ActionPanel: React.FunctionComponent<ActionPanelProps> = ({ details, expanded }) => {
   return (
     <Container expanded={expanded}>
-      <Text>{details}</Text>
+      <StyledText>{details}</StyledText>
     </Container>
   )
 }
