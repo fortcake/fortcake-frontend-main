@@ -61,14 +61,17 @@ const ScrollButtonContainer = styled.div`
 const GameTable: React.FC<ITableProps> = (props) => {
   const tableWrapperEl = useRef<HTMLDivElement>(null)
   const { t } = useTranslation()
-  const { data, columns, userDataReady } = props
+  const { data, columns } = props
 
   const { rows } = useTable(columns, data, { sortable: true, sortColumn: 'game' })
+
   const scrollToTop = (): void => {
     tableWrapperEl.current.scrollIntoView({
       behavior: 'smooth',
     })
   }
+
+  const closePanelEvent = new Event('closePanel')
 
   return (
     <Container id="farms-table">
@@ -77,7 +80,7 @@ const GameTable: React.FC<ITableProps> = (props) => {
           <StyledTable>
             <TableBody>
               {rows.map((row) => {
-                return <Row {...row.original} userDataReady={userDataReady} key={`table-row-${row.id}`} />
+                return <Row {...row.original} key={`table-row-${row.id}`} closePanelEvent={closePanelEvent} />
               })}
             </TableBody>
           </StyledTable>
