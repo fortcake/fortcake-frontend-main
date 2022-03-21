@@ -4,6 +4,7 @@ import { Flex, useDelayedUnmount } from 'fortcake-uikit-v2'
 import Game from './Game'
 import { GameProps } from '../types'
 import ActionPanel from './Actions/ActionPanel'
+import TruncateText from '../../../../utils/truncateText'
 
 export interface RowProps {
   game: GameProps
@@ -59,7 +60,7 @@ const Row: React.FunctionComponent<
         <td>
           <Flex alignItems="center" justifyContent="space-between" width="100%">
             <CellInner>
-              <Game {...game} subtitle={`${game.subtitle.split(' ').splice(0, WORDS_LIMIT).join(' ')}...`} />
+              <Game {...game} subtitle={`${TruncateText(game.subtitle, WORDS_LIMIT)}...`} />
             </CellInner>
           </Flex>
         </td>

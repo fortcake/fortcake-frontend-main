@@ -25,12 +25,12 @@ const LoadingDesktop: React.FC = () => {
 
 const LoadingMobile: React.FC = () => {
   return (
-    <Flex width="100%" flexDirection="column" alignItems="center">
-      <Skeleton variant="circle" width={90} height={90} mr="18px" mb="12px" />
-      <Flex ml="18px" width="100%" flexDirection="column">
-        <Skeleton width={140} height={5} />
-        <Skeleton width="90%" height={30} mt={2} />
-        <Skeleton width={200} height={30} mt={2} />
+    <Flex width="100%" alignItems="center" justifyContent="space-between">
+      <Skeleton variant="circle" width={90} height={90} mr="10px" />
+      <Flex width="60%" flexDirection="column" alignItems="flex-end" mt="10px">
+        <Skeleton width={160} height={25} />
+        <Skeleton width={100} height={5} mt={2} />
+        <Skeleton width="100%" height={30} mt={4} />
       </Flex>
     </Flex>
   )

@@ -20,26 +20,13 @@ const Container = styled.div`
   }
 `
 
-const FlexDesktop = styled(Flex)`
-  flex-direction: column;
-  width: 100%;
-  ${({ theme }) => theme.mediaQueries.md} {
-    flex-direction: row;
-  }
-`
-
 const TokenWrapper = styled.div`
-  margin-right: 18px;
   width: 100px;
-  margin-bottom: 12px;
   align-self: center;
 
   ${({ theme }) => theme.mediaQueries.sm} {
     width: 100px;
-  }
-
-  ${({ theme }) => theme.mediaQueries.md} {
-    margin-bottom: 0;
+    margin-right: 18px;
   }
 `
 
@@ -63,9 +50,9 @@ const FlexButton = styled(Flex)`
 
 const Rating: React.FC<{ votes: number }> = ({ children, votes }) => {
   const fail = votes < 100
-  const { isMobile, isTablet } = useMatchBreakpoints()
+  const { isMobile } = useMatchBreakpoints()
   return (
-    <Flex alignItems="center" mr={isMobile || isTablet ? '1em' : ''}>
+    <Flex alignItems="center" mr={isMobile ? '1em' : ''}>
       {!fail ? <ChevronUpIcon color="success" width={25} /> : <ChevronDownIcon width={25} color="failure" />}
       <Text
         color={!fail ? 'success' : 'failure'}
@@ -109,7 +96,7 @@ const ChainAddress: React.FC<{ chain: ChainProps[] }> = ({ chain }) => (
 )
 
 const Game: React.FunctionComponent<GameProps> = ({ title, subtitle, logo, votes, cta, chain }) => {
-  const { isMobile, isTablet, isDesktop } = useMatchBreakpoints()
+  const { isMobile, isTablet } = useMatchBreakpoints()
   const [base64, setBase64] = useState('data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=')
   const [imgLoading, setImgLoading] = useState(true)
 
@@ -137,9 +124,48 @@ const Game: React.FunctionComponent<GameProps> = ({ title, subtitle, logo, votes
     }
   }, [logo])
 
-  return (
-    <Container>
-      <FlexDesktop>
+  const renderContent = () => {
+    if (isMobile) {
+      return (
+        <>
+          <Flex justifyContent="space-between" alignItems="center" style={{ width: '100%' }}>
+            <TokenWrapper>
+              {imgLoading ? (
+                <Skeleton variant="circle" animation="waves" width={90} height={90} />
+              ) : (
+                <Image image={base64} width={120} height={120} />
+              )}
+            </TokenWrapper>
+            <Flex flexDirection="column" alignItems="flex-end" style={{ width: '100%' }}>
+              <Flex alignItems="center" mb="10px">
+                <Rating votes={votes}>{votes}</Rating>
+                <Text color="secondary" bold textTransform="uppercase">
+                  {title}
+                </Text>
+              </Flex>
+              <ChainAddress chain={chain} />
+            </Flex>
+          </Flex>
+          <Flex justifyContent="flex-end" mt="20px" style={{ width: '100%' }}>
+            <Button
+              className="externalLinks"
+              as="a"
+              href={chain.some((c) => c.chain === 'BSC') ? Links.bsc : Links.eth}
+              scale="sm"
+              mr="10px"
+            >
+              Swap
+            </Button>
+            <Button className="externalLinks" as="a" variant="secondary" href={cta} scale="sm">
+              Find out more
+            </Button>
+          </Flex>
+        </>
+      )
+    }
+
+    return (
+      <Flex style={{ width: '100%' }}>
         <TokenWrapper>
           {imgLoading ? (
             <Skeleton variant="circle" animation="waves" width={90} height={90} />
@@ -149,33 +175,37 @@ const Game: React.FunctionComponent<GameProps> = ({ title, subtitle, logo, votes
         </TokenWrapper>
         <Flex flexDirection="column" style={{ width: '100%' }}>
           <Flex alignItems="center">
-            {(isMobile || isTablet) && <Rating votes={votes}>{votes}</Rating>}
-            <Flex justifyContent="space-between" alignItems="center" style={{ width: '100%' }}>
-              <Text color="secondary" fontSize={isMobile || isTablet ? '16px' : '12px'} bold textTransform="uppercase">
-                {title}
-              </Text>
-              {isMobile && <ChainAddress chain={chain} />}
-            </Flex>
+            <Text color="secondary" fontSize={isTablet ? '16px' : '12px'} bold textTransform="uppercase">
+              {title}
+            </Text>
           </Flex>
           <Flex justifyContent="space-between">
             <Text bold>{subtitle}</Text>
-            {isDesktop && <Rating votes={votes}>{votes}</Rating>}
+            <Rating votes={votes}>{votes}</Rating>
           </Flex>
-          <Flex justifyContent="space-between" alignItems="flex-end">
-            <FlexButton className="links">
-              <Button as="a" href={chain.some((c) => c.chain === 'BSC') ? Links.bsc : Links.eth} scale="sm">
+          <Flex alignItems="center" justifyContent="space-between" mt="20px" ml="4px">
+            <Flex>
+              <Button
+                className="externalLinks"
+                as="a"
+                href={chain.some((c) => c.chain === 'BSC') ? Links.bsc : Links.eth}
+                scale="sm"
+                mr="20px"
+              >
                 Swap
               </Button>
-              <Button as="a" variant="secondary" href={cta} scale="sm">
+              <Button className="externalLinks" as="a" variant="secondary" href={cta} scale="sm">
                 Find out more
               </Button>
-            </FlexButton>
-            {(isDesktop || isTablet) && <ChainAddress chain={chain} />}
+            </Flex>
+            <ChainAddress chain={chain} />
           </Flex>
         </Flex>
-      </FlexDesktop>
-    </Container>
-  )
+      </Flex>
+    )
+  }
+
+  return <Container>{renderContent()}</Container>
 }
 
 export default Game
