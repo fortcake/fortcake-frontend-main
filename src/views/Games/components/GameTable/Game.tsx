@@ -81,11 +81,11 @@ const ChainAddress: React.FC<{ chain: ChainProps[] }> = ({ chain }) => (
         style={{ marginLeft: '10px' }}
         href={
           c.chain === 'BSC'
-            ? `https://bscscan.com/address/${c.address}`
+            ? `https://bsc.fortcake.io/swap/${c.address}`
             : c.chain === 'ETH'
-            ? `https://etherscan.io/address/${c.address}`
+            ? `https://eth.fortcake.io/swap/${c.address}`
             : c.chain === 'POL'
-            ? `https://polygonscan.com/address/${c.address}`
+            ? `https://pol.fortcake.io/swap/${c.address}`
             : '#'
         }
         variant="secondary"
