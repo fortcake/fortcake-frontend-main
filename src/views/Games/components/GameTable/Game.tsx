@@ -3,8 +3,8 @@ import styled from 'styled-components'
 import { Skeleton, Text, Flex, Button, ChevronUpIcon, ChevronDownIcon, useMatchBreakpoints } from 'fortcake-uikit-v2'
 import axios from 'axios'
 import { GameImage } from 'components/GameImage'
-import { Links } from 'fortcake-config-files/dist'
 import { GameProps, ChainProps } from '../types'
+import Select from '../Select'
 
 const Container = styled.div`
   display: flex;
@@ -23,9 +23,9 @@ const Container = styled.div`
 const TokenWrapper = styled.div`
   width: 100px;
   align-self: center;
+  margin-right: 12px;
 
   ${({ theme }) => theme.mediaQueries.sm} {
-    width: 100px;
     margin-right: 18px;
   }
 `
@@ -71,31 +71,22 @@ const Rating: React.FC<{ votes: number }> = ({ children, votes }) => {
   )
 }
 
-const ChainAddress: React.FC<{ chain: ChainProps[] }> = ({ chain }) => (
-  <FlexButton className="chainAdress">
-    {chain.map((c) => (
-      <Button
-        key={`${c.chain}-${c.address}`}
-        as="a"
-        target="_blank"
-        style={{ marginLeft: '10px' }}
-        href={
-          c.chain === 'BSC'
-            ? `https://bsc.fortcake.io/swap/${c.address}`
-            : c.chain === 'ETH'
-            ? `https://eth.fortcake.io/swap/${c.address}`
-            : c.chain === 'POL'
-            ? `https://pol.fortcake.io/swap/${c.address}`
-            : '#'
-        }
-        variant="secondary"
-        scale="xs"
-      >
-        {c.chain}
-      </Button>
-    ))}
-  </FlexButton>
-)
+const ChainAddress: React.FC<{ chain: ChainProps[] }> = ({ chain }) => {
+  const initValue = [{ label: 'Swap', value: '' }]
+  const availableChain = chain.map((c) => ({ label: c.chain, value: c.address }))
+  const options = initValue.concat(availableChain)
+  const handleOptionChange = ({ label, value }): { label: string; value: string } => {
+    const swapRedirect = `https://${label.toLowerCase()}.fortcake.io/swap/${value}`
+    if (label === 'Swap' || !value) return
+    // eslint-disable-next-line no-unused-expressions
+    window.open(swapRedirect, '_blank') || window.location.replace(swapRedirect)
+  }
+  return (
+    <FlexButton className="chainAdress">
+      <Select options={options} onOptionChange={handleOptionChange} mr="20px" />
+    </FlexButton>
+  )
+}
 
 const Game: React.FunctionComponent<GameProps & { actionPanelOpen: boolean }> = ({
   title,
@@ -138,7 +129,7 @@ const Game: React.FunctionComponent<GameProps & { actionPanelOpen: boolean }> = 
     if (isMobile) {
       return (
         <>
-          <Flex justifyContent="space-between" alignItems="flex-start" style={{ width: '100%' }}>
+          <Flex justifyContent="space-between" alignItems="center" style={{ width: '100%' }}>
             <TokenWrapper>
               {imgLoading ? (
                 <Skeleton variant="circle" animation="waves" width={90} height={90} />
@@ -147,28 +138,19 @@ const Game: React.FunctionComponent<GameProps & { actionPanelOpen: boolean }> = 
               )}
             </TokenWrapper>
             <Flex flexDirection="column" alignItems="flex-end" style={{ width: '100%' }}>
-              <Flex alignItems="center" mb="10px">
+              <Flex alignItems="center">
                 <Rating votes={votes}>{votes}</Rating>
                 <Text color="secondary" bold textTransform="uppercase" textAlign="right">
                   {title}
                 </Text>
               </Flex>
-              <ChainAddress chain={chain} />
+              <Flex mt="20px">
+                <Text textAlign="right">{subtitle}</Text>
+              </Flex>
             </Flex>
           </Flex>
-          <Flex mt="20px">
-            <Text textAlign="right">{subtitle}</Text>
-          </Flex>
           <Flex justifyContent="flex-end" mt="40px" style={{ width: '100%' }}>
-            <Button
-              className="externalLinks"
-              as="a"
-              href={chain.some((c) => c.chain === 'BSC') ? Links.bsc : Links.eth}
-              scale="sm"
-              mr="10px"
-            >
-              Swap
-            </Button>
+            <ChainAddress chain={chain} />
             <Button className="externalLinks" as="a" variant="secondary" href={cta} scale="sm">
               Find out more
             </Button>
@@ -205,20 +187,11 @@ const Game: React.FunctionComponent<GameProps & { actionPanelOpen: boolean }> = 
           </Flex>
           <Flex alignItems="center" justifyContent="space-between" mt="20px" ml="4px">
             <Flex>
-              <Button
-                className="externalLinks"
-                as="a"
-                href={chain.some((c) => c.chain === 'BSC') ? Links.bsc : Links.eth}
-                scale="sm"
-                mr="20px"
-              >
-                Swap
-              </Button>
+              <ChainAddress chain={chain} />
               <Button className="externalLinks" as="a" variant="secondary" href={cta} scale="sm">
                 Find out more
               </Button>
             </Flex>
-            <ChainAddress chain={chain} />
           </Flex>
         </Flex>
       </Flex>
