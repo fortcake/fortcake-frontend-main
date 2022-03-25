@@ -115,14 +115,15 @@ const Select: React.FunctionComponent<SelectProps> = ({
   //   const [selectedOptionIndex, setSelectedOptionIndex] = useState(defaultOptionIndex)
 
   const toggling = (event: React.MouseEvent<HTMLDivElement>) => {
+    document.dispatchEvent(e)
     setIsOpen(!isOpen)
     event.stopPropagation()
   }
 
+  const e = new Event('closeDropdown')
   const onOptionClicked = (selectedIndex: number) => () => {
     // setSelectedOptionIndex(selectedIndex)
     setIsOpen(false)
-
     if (onOptionChange) {
       onOptionChange(options[selectedIndex])
     }
@@ -134,8 +135,10 @@ const Select: React.FunctionComponent<SelectProps> = ({
     }
 
     document.addEventListener('click', handleClickOutside)
+    document.addEventListener('closeDropdown', handleClickOutside)
     return () => {
       document.removeEventListener('click', handleClickOutside)
+      document.removeEventListener('closeDropdown', handleClickOutside)
     }
   }, [])
 
