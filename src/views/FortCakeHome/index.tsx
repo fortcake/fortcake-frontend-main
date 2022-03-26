@@ -206,7 +206,6 @@ const Home: React.FC = () => {
                 </p>
               </div>
               <div style={{ marginTop: '40px' }}>
-                <p>Proposed Initial Token Value: 0.00000060 BTC</p>
                 <p>Total Supply: 203,009,146 FORTCAKE</p>
               </div>
             </Text>
