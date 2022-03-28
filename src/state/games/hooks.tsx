@@ -4,7 +4,7 @@ import axios from 'axios'
 import { State, Game } from '../types'
 import { GameProps } from '../../views/Games/components/types'
 
-const url = `https://api.airtable.com/v0/app15E3CJVgcqGz9s/site-content?api_key=${process.env.REACT_APP_A1RTABL3AP1K3Y}`
+const url = `http://gameslist.fortcake.io/games`
 
 const deserializeGame = (game: Game) => {
   const { title, subtitle, logo, cta, symbol, votes } = game
@@ -51,12 +51,9 @@ export const useGames = () => {
     const controller = new AbortController()
     const fetchGamesData = async () => {
       try {
-        const {
-          data: { records },
-        } = await axios.get(url, {
+        const { data: allGames } = await axios.get(url, {
           signal: controller.signal,
         })
-        const allGames = records.map(({ fields }) => ({ ...fields, logo: fields.logo[0].url }))
         setAirTableGames(allGames)
         setIsLoading(false)
       } catch (e) {
