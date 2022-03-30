@@ -50,6 +50,12 @@ export const FilterContainer = styled.div`
 
 export const StyledImage = styled(Image)`
   display: none;
+  &.showOnMobile {
+    display: flex;
+    ${({ theme }) => theme.mediaQueries.md} {
+      display: none;
+    }
+  }
   ${({ theme }) => theme.mediaQueries.md} {
     display: block;
   }

@@ -111,27 +111,39 @@ const Games: React.FC = () => {
     setSortOption(option.value)
   }
 
+  const mobileHeaderStyle = isMobile
+    ? {
+        fontSize: '44px',
+        marginRight: '10px',
+      }
+    : {}
+
   return (
     <>
       <PageHeader background="transparent" mt={!isMobile && '5vh'}>
         <Flex justifyContent="space-between">
           <LandingText>
-            <Heading as="h2" scale="lg" color="secondary" mt="42px">
-              Welcome to
-            </Heading>
-            <Heading
-              as="h1"
-              scale="xxl"
-              color="secondary"
-              mb="16px"
-              style={{
-                textShadow: isDark
-                  ? '3px -2px 1px rgb(25 159 125), -3px 3px 1px rgb(33 229 180)'
-                  : '#f1afc2 3px -2px 1px, #bb5768 -3px 3px 1px',
-              }}
-            >
-              FORTCAKE
-            </Heading>
+            <Flex alignItems="center" justifyContent="space-between" mb={isMobile ? '30px' : '20px'}>
+              <div>
+                <Heading as="h2" scale="lg" color="secondary" mt="42px">
+                  Welcome to
+                </Heading>
+                <Heading
+                  as="h1"
+                  scale="xxl"
+                  color="secondary"
+                  style={{
+                    ...mobileHeaderStyle,
+                    textShadow: isDark
+                      ? '3px -2px 1px rgb(25 159 125), -3px 3px 1px rgb(33 229 180)'
+                      : '#f1afc2 3px -2px 1px, #bb5768 -3px 3px 1px',
+                  }}
+                >
+                  FORTCAKE
+                </Heading>
+              </div>
+              <StyledImage src={LogoCake} width={100} height={78} mt="60px" loading="lazy" className="showOnMobile" />
+            </Flex>
             <H2 as="h2" override>
               Find PLAY-TO-EARN games, Swap tokens, Earn rewards, Trade NFT`s and Join our community! Featuring our most
               upvoted crypto games all in one place...
