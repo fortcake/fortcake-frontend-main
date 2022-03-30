@@ -68,6 +68,11 @@ export const SectionFlex = styled(Flex)`
   .imgHideOnMobile {
     display: none;
   }
+  .imgShowOnMobile {
+    ${({ theme }) => theme.mediaQueries.md} {
+      display: none;
+    }
+  }
   &.address {
     min-height: 21vh;
     align-items: flex-end;
@@ -205,6 +210,6 @@ export const SocialLink = styled(Link)`
   }
 `
 
-export const LazyImage: React.FC<ImageProps> = ({ height, width, src, className }, props) => (
+export const LazyImage: React.FC<ImageProps> = (props, { height, width, src, className }) => (
   <Image loading="lazy" height={height} width={width} src={src} className={className} {...props} />
 )

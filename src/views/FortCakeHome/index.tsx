@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, Button, Flex, dark } from 'fortcake-uikit-v2'
+import { Text, Button, Flex, dark, useMatchBreakpoints } from 'fortcake-uikit-v2'
 import { Socials } from '../../components/Menu/config/config'
 import useTheme from '../../hooks/useTheme'
 import { PageMeta } from '../../components/Layout/Page'
@@ -40,6 +40,7 @@ const [Twitter, Discord, Instagram, Medium, BscScanHref, PancakeSwapHref, CoinGe
 
 const Home: React.FC = () => {
   const { isDark } = useTheme()
+  const { isMobile } = useMatchBreakpoints()
   const ParticipateSection = React.useRef<HTMLDivElement>(null)
   const scrollToParticipate = (): void => {
     ParticipateSection.current.scrollIntoView({
@@ -47,24 +48,34 @@ const Home: React.FC = () => {
     })
   }
 
+  const mobileHeaderStyle = isMobile
+    ? {
+        fontSize: '38px',
+        marginRight: '10px',
+      }
+    : {}
+
   return (
     <>
       <PageMeta />
       <Section className="landingSection">
         <SectionFlex className="grid">
           <PageHeader>
-            <Heading
-              as="h1"
-              scale="xxl"
-              mb="20px"
-              style={{
-                textShadow: isDark
-                  ? '3px -2px 1px rgb(25 159 125), -3px 3px 1px rgb(33 229 180)'
-                  : '#f1afc2 3px -2px 1px, #bb5768 -3px 3px 1px',
-              }}
-            >
-              THE FUTURE IS HERE
-            </Heading>
+            <Flex alignItems="center" mb={isMobile ? '40px' : '20px'} justifyContent="space-between">
+              <Heading
+                as="h1"
+                scale="xxl"
+                style={{
+                  ...mobileHeaderStyle,
+                  textShadow: isDark
+                    ? '3px -2px 1px rgb(25 159 125), -3px 3px 1px rgb(33 229 180)'
+                    : '#f1afc2 3px -2px 1px, #bb5768 -3px 3px 1px',
+                }}
+              >
+                THE FUTURE {isMobile && <br />} IS HERE
+              </Heading>
+              <LazyImage src={CakeImage} width={100} height={78} className="imgShowOnMobile" />
+            </Flex>
             <Heading as="h4" scale="md" override>
               FORTCAKE is a community driven crypto gaming platform built on the Binance Smart Chain. The goal is
               simple; introduce the world to PLAY-TO-EARN.
