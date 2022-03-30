@@ -4,7 +4,7 @@ import axios from 'axios'
 import { State, Game } from '../types'
 import { GameProps } from '../../views/Games/components/types'
 
-const url = `http://gameslist.fortcake.io/games`
+const url = `https://api.fortcake.io/games`
 
 const deserializeGame = (game: Game) => {
   const { title, subtitle, logo, cta, symbol, votes } = game
