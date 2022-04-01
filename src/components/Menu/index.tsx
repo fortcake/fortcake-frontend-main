@@ -9,6 +9,7 @@ import useTheme from 'hooks/useTheme'
 import config from './config/config'
 import { getActiveMenuItem, getActiveSubMenuItem } from './utils'
 import { footerLinks } from './config/footerConfig'
+import NewsLetter from '../Newsletter'
 // import UserMenu from './UserMenu'
 // import GlobalSettings from './GlobalSettings'
 
@@ -74,6 +75,7 @@ const Menu = (props) => {
       activeSubItem={activeSubMenuItem?.href}
       logo={<HomeLink />}
       isInGamesPage={pathname.includes(GamesLink.link)}
+      newsLetterComponent={<NewsLetter />}
       {...props}
     />
   )

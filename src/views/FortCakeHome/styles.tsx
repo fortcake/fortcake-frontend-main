@@ -210,6 +210,6 @@ export const SocialLink = styled(Link)`
   }
 `
 
-export const LazyImage: React.FC<ImageProps> = (props, { height, width, src, className }) => (
+export const LazyImage: React.FC<ImageProps> = ({ height, width, src, className, ...props }) => (
   <Image loading="lazy" height={height} width={width} src={src} className={className} {...props} />
 )
