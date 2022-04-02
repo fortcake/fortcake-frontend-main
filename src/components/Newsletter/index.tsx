@@ -1,7 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import { Input, Button, Flex, Text, dark } from 'fortcake-uikit-v2'
 import styled from 'styled-components'
-// import debounce from 'lodash/debounce'
 import axios, { AxiosRequestConfig } from 'axios'
 import { string } from 'yup'
 import Loading from '../Loader/CircleLoader'
@@ -48,15 +47,20 @@ const SearchInput: React.FC = () => {
   const [email, setEmail] = useState('')
   const [success, setSuccess] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
+  const inputEmail = useRef(null)
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    inputEmail.current.style.borderColor = dark.colors.inputSecondary
     setEmail(e.target.value)
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      if (!email) throw new Error('Nothing here')
+      if (!email) {
+        inputEmail.current.style.borderColor = dark.colors.failure
+        throw new Error('Nothing here')
+      }
       const eadd = await emailSchema.validate(email)
       setIsLoading(true)
 
@@ -78,6 +82,7 @@ const SearchInput: React.FC = () => {
         setSuccess(true)
       }
     } catch (error) {
+      inputEmail.current.style.borderColor = dark.colors.failure
       setIsLoading(false)
       console.info({ error })
     }
@@ -92,7 +97,7 @@ const SearchInput: React.FC = () => {
         {!success ? (
           <form>
             <InputWrapper>
-              <StyledInput value={email} onChange={onChange} placeholder="Enter your email address" />
+              <StyledInput value={email} onChange={onChange} placeholder="Enter your email address" ref={inputEmail} />
               {!isLoading && (
                 <StyledButton variant="primary" type="submit" onClick={handleSubmit}>
                   Subscribe
