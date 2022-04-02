@@ -10681,7 +10681,7 @@ fortcake-config-files@fortcake/fortcake-config-files:
 
 fortcake-uikit-v2@fortcake/fortcake-uikit-v2#featsignup:
   version "0.63.1"
-  resolved "https://codeload.github.com/fortcake/fortcake-uikit-v2/tar.gz/b3f77d9cda722c78d396e4b47cfdbb007955fbc2"
+  resolved "https://codeload.github.com/fortcake/fortcake-uikit-v2/tar.gz/d577efd5b6f425bdd80af7e44d44275ada5a0088"
   dependencies:
     "@popperjs/core" "^2.9.2"
     "@types/styled-system" "^5.1.10"
