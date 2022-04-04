@@ -59,7 +59,7 @@ const SearchInput: React.FC = () => {
     try {
       if (!email) {
         inputEmail.current.style.borderColor = dark.colors.failure
-        throw new Error('Nothing here')
+        throw new Error('Enter email address')
       }
       const eadd = await emailSchema.validate(email)
       setIsLoading(true)
@@ -107,7 +107,9 @@ const SearchInput: React.FC = () => {
             </InputWrapper>
           </form>
         ) : (
-          <Text color={dark.colors.text}>Thank you for subscribing!</Text>
+          <Flex minHeight={40} alignItems="center" pl="">
+            <Text color={dark.colors.secondary}>Thank you for subscribing!</Text>
+          </Flex>
         )}
       </WrapWrapper>
     </MainWrapper>
