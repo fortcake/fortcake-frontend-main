@@ -21,7 +21,7 @@ const CellInner = styled.div`
     padding-bottom: 24px;
   }
   ${({ theme }) => theme.mediaQueries.xl} {
-    padding-right: 32px;
+    padding-right: 12px;
   }
 `
 

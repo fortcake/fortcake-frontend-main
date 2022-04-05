@@ -1,10 +1,24 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
-import { Skeleton, Text, Flex, Button, ChevronUpIcon, ChevronDownIcon, useMatchBreakpoints } from 'fortcake-uikit-v2'
+import {
+  Skeleton,
+  Text,
+  Flex,
+  Button,
+  Image as Img,
+  ChevronUpIcon,
+  ChevronDownIcon,
+  useMatchBreakpoints,
+} from 'fortcake-uikit-v2'
 import axios from 'axios'
 import { GameImage } from 'components/GameImage'
 import { GameProps, ChainProps } from '../types'
 import Select from '../Select'
+
+import green from '../../../../assets/images/gamelist/greenfortcakesize.png'
+import orange from '../../../../assets/images/gamelist/orangefortcakesize.png'
+import red from '../../../../assets/images/gamelist/redfortcakesize.png'
+import yellow from '../../../../assets/images/gamelist/yellowfortcakesize.png'
 
 const Container = styled.div`
   display: flex;
@@ -48,24 +62,46 @@ const FlexButton = styled(Flex)`
   }
 `
 
-const Rating: React.FC<{ votes: number }> = ({ children, votes }) => {
-  const fail = votes < 100
+const Rating: React.FC<{ votes: number }> = ({ votes }) => {
   const { isMobile } = useMatchBreakpoints()
+
+  // const colors = {
+  //   red: '#E72F2E',
+  //   orange: '#E3BA32',
+  //   yellow: '#D3D42D',
+  //   green: '#83EC83',
+  // }
+
+  let ratingIcon: string
+  // let b: string
+
+  if (votes >= 25 && votes <= 49) {
+    ratingIcon = orange
+    // b = colors.orange
+  } else if (votes >= 50 && votes <= 74) {
+    ratingIcon = yellow
+    // b = colors.yellow
+  } else if (votes >= 75) {
+    ratingIcon = green
+    // b = colors.green
+  } else {
+    ratingIcon = red
+    // b = colors.red
+  }
+
   return (
-    <Flex alignItems="center" mr={isMobile ? '1em' : ''}>
-      {!fail ? <ChevronUpIcon color="success" width={25} /> : <ChevronDownIcon width={25} color="failure" />}
+    <Flex alignItems="center" justifyContent="flex-end" width={isMobile ? '100%' : ''}>
+      <Img src={ratingIcon} width={18} height={18} mr="8px" style={{ width: '18px' }} />
       <Text
-        color={!fail ? 'success' : 'failure'}
+        color="text"
+        fontSize="1"
         fontWeight="bold"
-        fontSize="3"
         as="h3"
         style={{
-          textShadow: !fail
-            ? '#31d0aa40 -15px 6px 20px, #31d0aa40 8px -3px 20px, #31d0aa40 -13px -5px 20px, #31d0aa40 13px 8px 20px'
-            : '#bd30786e -15px 6px 20px, #ef52be70 8px -3px 20px, #b35a876b -13px -5px 20px, #9f396d5c 13px 8px 20px',
+          minWidth: isMobile ? '' : '54px',
         }}
       >
-        {children}
+        {votes} %
       </Text>
     </Flex>
   )
@@ -138,8 +174,8 @@ const Game: React.FunctionComponent<GameProps & { actionPanelOpen: boolean }> = 
               )}
             </TokenWrapper>
             <Flex flexDirection="column" alignItems="flex-end" style={{ width: '100%' }}>
-              <Flex alignItems="center">
-                <Rating votes={votes}>{votes}</Rating>
+              <Flex flexDirection="column" alignItems="center">
+                <Rating votes={votes} />
                 <Text color="secondary" bold textTransform="uppercase" textAlign="right">
                   {title}
                 </Text>
@@ -183,7 +219,7 @@ const Game: React.FunctionComponent<GameProps & { actionPanelOpen: boolean }> = 
           </Flex>
           <Flex justifyContent="space-between">
             <Text bold>{subtitle}</Text>
-            <Rating votes={votes}>{votes}</Rating>
+            <Rating votes={votes} />
           </Flex>
           <Flex alignItems="center" justifyContent="space-between" mt="20px" ml="4px">
             <Flex>
