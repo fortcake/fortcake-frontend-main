@@ -2,7 +2,7 @@ import React from 'react'
 import { useLocation } from 'react-router'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import { Menu as UikitMenu, Button, Flex, GamesLink, MenuItemsType } from 'fortcake-uikit-v2'
+import { Menu as UikitMenu, Flex, GamesLink, Button, MenuItemsType } from 'fortcake-uikit-v2'
 import { languageList } from 'config/localization/languages'
 import { useTranslation } from 'contexts/Localization'
 import useTheme from 'hooks/useTheme'
@@ -10,7 +10,7 @@ import config from './config/config'
 import { getActiveMenuItem, getActiveSubMenuItem } from './utils'
 import { footerLinks } from './config/footerConfig'
 import NewsLetter from '../Newsletter'
-// import UserMenu from './UserMenu'
+import UserMenu from './UserMenu'
 // import GlobalSettings from './GlobalSettings'
 
 // logos
@@ -29,21 +29,24 @@ const LogoImg = styled.img`
   }
 `
 
-const StyledLink = styled(Link)`
-  font-size: 16px;
-  ${({ theme }) => theme.mediaQueries.sm} {
-    font-size: 12px;
-  }
-  ${({ theme }) => theme.mediaQueries.md} {
-    font-size: 16px;
-  }
-`
+// const StyledLink = styled(Link)`
+//   font-size: 16px;
+//   ${({ theme }) => theme.mediaQueries.sm} {
+//     font-size: 12px;
+//   }
+//   ${({ theme }) => theme.mediaQueries.md} {
+//     font-size: 16px;
+//   }
+// `
 
-const DappLink: React.FC = () => (
-  <Button as="button" variant="primary" scale="sm">
-    <StyledLink to={GamesLink.link}>Launch App</StyledLink>
-  </Button>
-)
+const DappLink: React.FC = () => {
+  return <UserMenu />
+  // return (
+  //   <Button as="button" variant="primary" scale="sm">
+  //     <StyledLink to={GamesLink.link}>Launch App</StyledLink>
+  //   </Button>
+  // )
+}
 
 const HomeLink: React.FC = () => (
   <Flex alignItems="center">
@@ -66,6 +69,14 @@ const Menu = (props) => {
   const { pathname } = useLocation()
 
   let menus = config(t)
+  menus = [
+    ...menus,
+    {
+      label: 'Swappy',
+      href: '/swappy',
+      icon: 'swap',
+    },
+  ]
   menus = pathname.includes(GamesLink.link) ? [...menus, SubmitGamesNav] : menus
 
   const activeMenuItem = getActiveMenuItem({ menuConfig: menus, pathname })
