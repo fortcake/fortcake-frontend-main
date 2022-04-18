@@ -10691,9 +10691,9 @@ fortcake-config-files@fortcake/fortcake-config-files:
   dependencies:
     typescript "^4.6.2"
 
-fortcake-uikit-v2@fortcake/fortcake-uikit-v2:
-  version "0.0.1"
-  resolved "https://codeload.github.com/fortcake/fortcake-uikit-v2/tar.gz/25dad14b83c9fbc93638470a49341b18eec9132c"
+fortcake-uikit-v2@fortcake/fortcake-uikit-v2#dev:
+  version "0.0.2"
+  resolved "https://codeload.github.com/fortcake/fortcake-uikit-v2/tar.gz/ff7b16b2c5af9a7148cc0a9bdeb756fa91ee24ed"
   dependencies:
     "@popperjs/core" "^2.9.2"
     "@types/styled-system" "^5.1.10"
