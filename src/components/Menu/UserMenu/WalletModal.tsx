@@ -15,6 +15,7 @@ import { parseUnits } from 'ethers/lib/utils'
 import { useTranslation } from 'contexts/Localization'
 import styled from 'styled-components'
 import { FetchStatus, useGetBnbBalance } from 'hooks/useTokenBalance'
+import useTheme from 'hooks/useTheme'
 import WalletInfo from './WalletInfo'
 import WalletTransactions from './WalletTransactions'
 
@@ -44,6 +45,7 @@ const WalletModal: React.FC<WalletModalProps> = ({ initialView = WalletView.WALL
   const { t } = useTranslation()
   const { balance, fetchStatus } = useGetBnbBalance()
   const hasLowBnbBalance = fetchStatus === FetchStatus.SUCCESS && balance.lte(LOW_BNB_BALANCE)
+  const { isDark } = useTheme()
 
   const handleClick = (newIndex: number) => {
     setView(newIndex)
@@ -60,7 +62,13 @@ const WalletModal: React.FC<WalletModalProps> = ({ initialView = WalletView.WALL
         </IconButton>
       </ModalHeader>
       <Tabs>
-        <ButtonMenu scale="sm" variant="subtle" onItemClick={handleClick} activeIndex={view} fullWidth>
+        <ButtonMenu
+          scale="sm"
+          variant={isDark ? 'subtle' : 'primary'}
+          onItemClick={handleClick}
+          activeIndex={view}
+          fullWidth
+        >
           <ButtonMenuItem>{t('Wallet')}</ButtonMenuItem>
           <ButtonMenuItem>{t('Transactions')}</ButtonMenuItem>
         </ButtonMenu>

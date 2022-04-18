@@ -8,7 +8,7 @@ const Wrapper = styled.div`
   border-radius: 16px;
   filter: ${({ theme }) => theme.card.dropShadow};
   width: 100%;
-  background: ${({ theme }) => theme.card.background};
+  background: ${({ theme }) => (theme.isDark ? theme.card.background : 'white')};
 `
 const LoadingDesktop: React.FC = () => {
   return (

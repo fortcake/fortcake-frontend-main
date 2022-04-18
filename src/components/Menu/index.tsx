@@ -69,14 +69,26 @@ const Menu = (props) => {
   const { pathname } = useLocation()
 
   let menus = config(t)
-  menus = [
-    ...menus,
-    {
-      label: 'Swappy',
-      href: '/swappy',
-      icon: 'swap',
-    },
-  ]
+  menus = menus.map((menu) =>
+    menu.label === 'Swap'
+      ? {
+          ...menu,
+          href: '/swap',
+          useRouterLink: true,
+        }
+      : menu,
+  )
+
+  menus = menus.map((menu) =>
+    menu.label === 'Play'
+      ? {
+          ...menu,
+          href: '/play',
+          useRouterLink: true,
+        }
+      : menu,
+  )
+
   menus = pathname.includes(GamesLink.link) ? [...menus, SubmitGamesNav] : menus
 
   const activeMenuItem = getActiveMenuItem({ menuConfig: menus, pathname })
@@ -84,7 +96,7 @@ const Menu = (props) => {
 
   return (
     <UikitMenu
-      userMenu={pathname.includes(GamesLink.link) ? <></> : <DappLink />}
+      userMenu={<DappLink />}
       isDark={isDark}
       toggleTheme={toggleTheme}
       currentLang={currentLanguage.code}

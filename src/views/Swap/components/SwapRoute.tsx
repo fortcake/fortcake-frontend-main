@@ -1,7 +1,8 @@
 import React, { Fragment, memo } from 'react'
 import { Trade } from '@pancakeswap/sdk'
-import { Text, Flex, ChevronRightIcon } from 'fortcake-uikit-v2'
+import { Flex, ChevronRightIcon } from 'fortcake-uikit-v2'
 import { unwrappedToken } from 'utils/wrappedCurrency'
+import { Text } from './styleds'
 
 export default memo(function SwapRoute({ trade }: { trade: Trade }) {
   return (
@@ -13,7 +14,7 @@ export default memo(function SwapRoute({ trade }: { trade: Trade }) {
           // eslint-disable-next-line react/no-array-index-key
           <Fragment key={i}>
             <Flex alignItems="end">
-              <Text fontSize="14px" ml="0.125rem" mr="0.125rem">
+              <Text $contrast={2} fontSize="14px" ml="0.125rem" mr="0.125rem">
                 {currency.symbol}
               </Text>
             </Flex>

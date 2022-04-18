@@ -3,23 +3,23 @@ import styled from 'styled-components'
 import { CurrencyAmount, JSBI, Token, Trade } from '@pancakeswap/sdk'
 import {
   Button,
-  Text,
   ArrowDownIcon,
   Box,
   useModal,
   Flex,
   IconButton,
-  BottomDrawer,
+  // BottomDrawer,
   useMatchBreakpoints,
   ArrowUpDownIcon,
 } from 'fortcake-uikit-v2'
-import { RouteComponentProps } from 'react-router-dom'
+// import { RouteComponentProps } from 'react-router-dom'
 import { useIsTransactionUnsupported } from 'hooks/Trades'
 import { useTranslation } from 'contexts/Localization'
 import SwapWarningTokens from 'config/constants/swapWarningTokens'
 
+// import useTheme from 'hooks/useTheme'
 import UnsupportedCurrencyFooter from 'components/UnsupportedCurrencyFooter'
-import Footer from 'components/Menu/Footer'
+// import Footer from 'components/Menu/Footer'
 import AddressInputPanel from './components/AddressInputPanel'
 import { GreyCard } from '../../components/Card'
 import Column, { AutoColumn } from '../../components/Layout/Column'
@@ -28,32 +28,33 @@ import CurrencyInputPanel from '../../components/CurrencyInputPanel'
 import { AutoRow, RowBetween } from '../../components/Layout/Row'
 import AdvancedSwapDetailsDropdown from './components/AdvancedSwapDetailsDropdown'
 import confirmPriceImpactWithoutFee from './components/confirmPriceImpactWithoutFee'
-import { ArrowWrapper, SwapCallbackError, Wrapper } from './components/styleds'
+import { Text, ArrowWrapper, SwapCallbackError, Wrapper } from './components/styleds'
 import TradePrice from './components/TradePrice'
-import ImportTokenWarningModal from './components/ImportTokenWarningModal'
+// import ImportTokenWarningModal from './components/ImportTokenWarningModal'
 import ProgressSteps from './components/ProgressSteps'
 import { AppBody } from '../../components/App'
 import ConnectWalletButton from '../../components/ConnectWalletButton'
 
 import { INITIAL_ALLOWED_SLIPPAGE } from '../../config/constants'
 import useActiveWeb3React from '../../hooks/useActiveWeb3React'
-import { useCurrency, useAllTokens } from '../../hooks/Tokens'
+// import { useCurrency, useAllTokens } from '../../hooks/Tokens'
 import { ApprovalState, useApproveCallbackFromTrade } from '../../hooks/useApproveCallback'
 import { useSwapCallback } from '../../hooks/useSwapCallback'
 import useWrapCallback, { WrapType } from '../../hooks/useWrapCallback'
 import { Field } from '../../state/swap/actions'
+
 import {
   useDefaultsFromURLSearch,
   useDerivedSwapInfo,
   useSwapActionHandlers,
   useSwapState,
-  useSingleTokenSwapInfo,
+  // useSingleTokenSwapInfo,
 } from '../../state/swap/hooks'
 import {
   useExpertModeManager,
   useUserSlippageTolerance,
   useUserSingleHopOnly,
-  useExchangeChartManager,
+  // useExchangeChartManager,
 } from '../../state/user/hooks'
 import { maxAmountSpend } from '../../utils/maxAmountSpend'
 import { computeTradePriceBreakdown, warningSeverity } from '../../utils/prices'
@@ -67,7 +68,7 @@ import CurrencyInputHeader from './components/CurrencyInputHeader'
 const Label = styled(Text)`
   font-size: 12px;
   font-weight: bold;
-  color: ${({ theme }) => theme.colors.secondary};
+  color: ${({ theme }) => (theme.isDark ? theme.colors.primary : theme.colors.textSubtle2)};
 `
 
 const SwitchIconButton = styled(IconButton)`
@@ -89,38 +90,38 @@ const SwitchIconButton = styled(IconButton)`
 `
 
 export default function Swap() {
-  const loadedUrlParams = useDefaultsFromURLSearch()
+  const loadedUrlParams = useDefaultsFromURLSearch() // <----------
   const { t } = useTranslation()
   const { isMobile } = useMatchBreakpoints()
 
   // /************************ not needed ************************/
 
-  const [isChartExpanded, setIsChartExpanded] = useState(false)
-  const [userChartPreference, setUserChartPreference] = useExchangeChartManager(isMobile)
-  const [isChartDisplayed, setIsChartDisplayed] = useState(userChartPreference)
+  // const [isChartExpanded, setIsChartExpanded] = useState(false)
+  // const [userChartPreference, setUserChartPreference] = useExchangeChartManager(isMobile)
+  // const [isChartDisplayed, setIsChartDisplayed] = useState(userChartPreference)
   // /************************ not needed ************************/
 
-  useEffect(() => {
-    setUserChartPreference(isChartDisplayed)
-  }, [isChartDisplayed, setUserChartPreference])
+  // useEffect(() => {
+  //   setUserChartPreference(isChartDisplayed)
+  // }, [isChartDisplayed, setUserChartPreference])
 
   // token warning stuff
-  const [loadedInputCurrency, loadedOutputCurrency] = [
-    useCurrency(loadedUrlParams?.inputCurrencyId),
-    useCurrency(loadedUrlParams?.outputCurrencyId),
-  ]
-  const urlLoadedTokens: Token[] = useMemo(
-    () => [loadedInputCurrency, loadedOutputCurrency]?.filter((c): c is Token => c instanceof Token) ?? [],
-    [loadedInputCurrency, loadedOutputCurrency],
-  )
+  // const [loadedInputCurrency, loadedOutputCurrency] = [
+  //   useCurrency(loadedUrlParams?.inputCurrencyId),
+  //   useCurrency(loadedUrlParams?.outputCurrencyId),
+  // ]
+  // const urlLoadedTokens: Token[] = useMemo(
+  //   () => [loadedInputCurrency, loadedOutputCurrency]?.filter((c): c is Token => c instanceof Token) ?? [],
+  //   [loadedInputCurrency, loadedOutputCurrency],
+  // )
 
   // dismiss warning if all imported tokens are in active lists
-  const defaultTokens = useAllTokens()
-  const importTokensNotInDefault =
-    urlLoadedTokens &&
-    urlLoadedTokens.filter((token: Token) => {
-      return !(token.address in defaultTokens)
-    })
+  // const defaultTokens = useAllTokens()
+  // const importTokensNotInDefault =
+  //   urlLoadedTokens &&
+  //   urlLoadedTokens.filter((token: Token) => {
+  //     return !(token.address in defaultTokens)
+  //   })
 
   const { account } = useActiveWeb3React()
 
@@ -131,15 +132,14 @@ export default function Swap() {
   const [allowedSlippage] = useUserSlippageTolerance()
 
   // swap state
-  const a = useSwapState()
-  const { independentField, typedValue, recipient } = a
+  const { independentField, typedValue, recipient } = useSwapState()
   const { v2Trade, currencyBalances, parsedAmount, currencies, inputError: swapInputError } = useDerivedSwapInfo()
 
   // Price data
-  const {
-    [Field.INPUT]: { currencyId: inputCurrencyId },
-    [Field.OUTPUT]: { currencyId: outputCurrencyId },
-  } = useSwapState()
+  // const {
+  //   [Field.INPUT]: { currencyId: inputCurrencyId },
+  //   [Field.OUTPUT]: { currencyId: outputCurrencyId },
+  // } = useSwapState()
 
   const {
     wrapType,
@@ -149,7 +149,7 @@ export default function Swap() {
   const showWrap: boolean = wrapType !== WrapType.NOT_APPLICABLE
   const trade = showWrap ? undefined : v2Trade
 
-  const singleTokenPrice = useSingleTokenSwapInfo()
+  // const singleTokenPrice = useSingleTokenSwapInfo()
 
   const parsedAmounts = showWrap
     ? {
@@ -331,16 +331,16 @@ export default function Swap() {
 
   const swapIsUnsupported = useIsTransactionUnsupported(currencies?.INPUT, currencies?.OUTPUT)
 
-  const [onPresentImportTokenWarningModal] = useModal(
-    <ImportTokenWarningModal tokens={importTokensNotInDefault} onCancel={() => console.log(1)} />,
-  )
+  // const [onPresentImportTokenWarningModal] = useModal(
+  //   <ImportTokenWarningModal tokens={importTokensNotInDefault} onCancel={() => console.log(1)} />,
+  // )
 
-  useEffect(() => {
-    if (importTokensNotInDefault.length > 0) {
-      onPresentImportTokenWarningModal()
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [importTokensNotInDefault.length])
+  // useEffect(() => {
+  //   if (importTokensNotInDefault.length > 0) {
+  //     onPresentImportTokenWarningModal()
+  //   }
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [importTokensNotInDefault.length])
 
   const [onPresentConfirmModal] = useModal(
     <ConfirmSwapModal
@@ -366,11 +366,11 @@ export default function Swap() {
       justifyContent="center"
       alignItems="center"
       position="relative"
-      style={{ minHeight: 'calc(100vh - 40px)' }}
+      style={{ minHeight: 'calc(100vh + 60px)' }}
     >
       <Flex flexDirection="column">
-        <StyledSwapContainer $isChartExpanded={isChartExpanded}>
-          <StyledInputCurrencyWrapper mt={isChartExpanded ? '24px' : '0'}>
+        <StyledSwapContainer $isChartExpanded={false}>
+          <StyledInputCurrencyWrapper mt={0}>
             <AppBody>
               <CurrencyInputHeader
                 title={t('Exchange')}
@@ -458,7 +458,7 @@ export default function Swap() {
                       {allowedSlippage !== INITIAL_ALLOWED_SLIPPAGE && (
                         <RowBetween align="center">
                           <Label>{t('Slippage Tolerance')}</Label>
-                          <Text bold color="primary">
+                          <Text $contrast={2} bold>
                             {allowedSlippage / 100}%
                           </Text>
                         </RowBetween>
@@ -480,11 +480,11 @@ export default function Swap() {
                     </Button>
                   ) : noRoute && userHasSpecifiedInputOutput ? (
                     <GreyCard style={{ textAlign: 'center' }}>
-                      <Text color="textSubtle" mb="4px">
+                      <Text mb="4px" $customColor="primary">
                         {t('Insufficient liquidity for this trade.')}
                       </Text>
                       {singleHopOnly && (
-                        <Text color="textSubtle" mb="4px">
+                        <Text $customColor="primary" mb="4px">
                           {t('Try enabling multi-hop trades.')}
                         </Text>
                       )}

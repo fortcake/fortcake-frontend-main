@@ -1,7 +1,7 @@
 import React from 'react'
 import { Price } from '@pancakeswap/sdk'
-import { Text, AutoRenewIcon } from 'fortcake-uikit-v2'
-import { StyledBalanceMaxMini } from './styleds'
+import { AutoRenewIcon } from 'fortcake-uikit-v2'
+import { Text, StyledBalanceMaxMini } from './styleds'
 
 interface TradePriceProps {
   price?: Price
@@ -18,7 +18,7 @@ export default function TradePrice({ price, showInverted, setShowInverted }: Tra
     : `${price?.baseCurrency?.symbol} per ${price?.quoteCurrency?.symbol}`
 
   return (
-    <Text style={{ justifyContent: 'center', alignItems: 'center', display: 'flex' }}>
+    <Text $contrast={2} style={{ justifyContent: 'center', alignItems: 'center', display: 'flex' }}>
       {show ? (
         <>
           {formattedPrice ?? '-'} {label}

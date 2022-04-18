@@ -95,8 +95,7 @@
       "address": "0x2f477a472f4657f7917126a663b5affe94d5a2b6",
       "symbol": "FORTCAKE",
       "decimals": 18,
-      "chainId": 56,
-      "logoURI": "https://bsc.fortcake.io/images/coins/FORTCAKE.png"
+      "chainId": 56
     },
     {
       "name": "WBNB Token",

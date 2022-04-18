@@ -1,9 +1,11 @@
 import React from 'react'
 import { Currency, Pair } from '@pancakeswap/sdk'
-import { Button, ChevronDownIcon, Text, useModal, Flex, Box } from 'fortcake-uikit-v2'
+import { Button, ChevronDownIcon, useModal, Flex, Box } from 'fortcake-uikit-v2'
 import styled from 'styled-components'
 import { useTranslation } from 'contexts/Localization'
 import useActiveWeb3React from 'hooks/useActiveWeb3React'
+import useTheme from 'hooks/useTheme'
+import { Text } from 'views/Swap/components/styleds'
 import { useCurrencyBalance } from '../../state/wallet/hooks'
 import CurrencySearchModal from '../SearchModal/CurrencySearchModal'
 import { CurrencyLogo, DoubleCurrencyLogo } from '../Logo'
@@ -35,7 +37,7 @@ const InputPanel = styled.div`
   flex-flow: column nowrap;
   position: relative;
   border-radius: '20px';
-  background-color: ${({ theme }) => theme.colors.backgroundAlt};
+  background-color: ${({ theme }) => (theme.isDark ? theme.colors.backgroundAlt : theme.colors.tertiary)};
   z-index: 1;
 `
 const Container = styled.div`
@@ -76,6 +78,7 @@ export default function CurrencyInputPanel({
   const { account } = useActiveWeb3React()
   const selectedCurrencyBalance = useCurrencyBalance(account ?? undefined, currency ?? undefined)
   const { t } = useTranslation()
+  const { isDark, theme } = useTheme()
 
   const [onPresentCurrencyModal] = useModal(
     <CurrencySearchModal
@@ -104,11 +107,11 @@ export default function CurrencyInputPanel({
               <CurrencyLogo currency={currency} size="24px" style={{ marginRight: '8px' }} />
             ) : null}
             {pair ? (
-              <Text id="pair" bold>
+              <Text $contrast={1} id="pair" bold>
                 {pair?.token0.symbol}:{pair?.token1.symbol}
               </Text>
             ) : (
-              <Text id="pair" bold>
+              <Text $contrast={1} id="pair" bold color={isDark ? 'textSubtle' : 'textDarkContrast'}>
                 {(currency && currency.symbol && currency.symbol.length > 20
                   ? `${currency.symbol.slice(0, 4)}...${currency.symbol.slice(
                       currency.symbol.length - 5,
@@ -117,11 +120,13 @@ export default function CurrencyInputPanel({
                   : currency?.symbol) || t('Select a currency')}
               </Text>
             )}
-            {!disableCurrencySelect && <ChevronDownIcon />}
+            {!disableCurrencySelect && (
+              <ChevronDownIcon color={isDark ? theme.colors.textSubtle : theme.colors.backgroundAlt2} />
+            )}
           </Flex>
         </CurrencySelectButton>
         {account && (
-          <Text onClick={onMax} color="textSubtle" fontSize="14px" style={{ display: 'inline', cursor: 'pointer' }}>
+          <Text $contrast={1} onClick={onMax} fontSize="14px" style={{ display: 'inline', cursor: 'pointer' }}>
             {!hideBalance && !!currency
               ? t('Balance: %balance%', { balance: selectedCurrencyBalance?.toSignificant(6) ?? t('Loading') })
               : ' -'}

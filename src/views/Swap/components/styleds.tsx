@@ -1,11 +1,33 @@
-import { ErrorIcon, Text } from 'fortcake-uikit-v2'
+import { ErrorIcon, Text as TextUIKit, Heading as HeadingUIKit, Colors } from 'fortcake-uikit-v2'
 import { AutoColumn } from 'components/Layout/Column'
 import React from 'react'
 import styled, { css } from 'styled-components'
 
+export const Heading = styled(HeadingUIKit)`
+  color: ${({ theme }) => (theme.isDark ? theme.colors.textSubtle : theme.colors.textDarkerContrast)};
+`
+
+export const Text = styled(TextUIKit)<{ $customColor?: keyof Colors; $contrast?: 1 | 2 }>`
+  color: ${({ theme, $customColor, $contrast }) =>
+    theme.isDark
+      ? theme.colors.textSubtle
+      : !$customColor
+      ? $contrast && $contrast === 1
+        ? theme.colors.textDarkContrast
+        : $contrast && $contrast === 2
+        ? theme.colors.textDarkerContrast
+        : theme.colors.textSubtle2
+      : theme.colors[$customColor]};
+`
+
 export const Wrapper = styled.div`
   position: relative;
   padding: 1rem;
+  ${({ theme }) =>
+    !theme.isDark &&
+    `
+    background-color: ${theme.colors.tertiary}
+  `}
 `
 
 export const ArrowWrapper = styled.div<{ clickable: boolean }>`
@@ -22,7 +44,7 @@ export const ArrowWrapper = styled.div<{ clickable: boolean }>`
       : null}
 `
 
-export const ErrorText = styled(Text)<{ severity?: 0 | 1 | 2 | 3 | 4 }>`
+export const ErrorText = styled(TextUIKit)<{ severity?: 0 | 1 | 2 | 3 | 4 }>`
   color: ${({ theme, severity }) =>
     severity === 3 || severity === 4
       ? theme.colors.failure
@@ -59,7 +81,7 @@ export const StyledBalanceMaxMini = styled.button`
   }
 `
 
-export const TruncatedText = styled(Text).attrs({ ellipsis: true })`
+export const TruncatedText = styled(TextUIKit).attrs({ ellipsis: true })`
   width: 220px;
 `
 
