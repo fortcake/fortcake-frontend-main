@@ -10686,14 +10686,14 @@ form-data@~2.3.2:
     mime-types "^2.1.12"
 
 fortcake-config-files@fortcake/fortcake-config-files:
-  version "0.0.3"
-  resolved "https://codeload.github.com/fortcake/fortcake-config-files/tar.gz/b879943c9272470ae1f48ccbfba5fbba4c664c67"
+  version "0.0.5"
+  resolved "https://codeload.github.com/fortcake/fortcake-config-files/tar.gz/997f3de3cf91ec46acb3f54a6a4cc410223d57e4"
   dependencies:
     typescript "^4.6.2"
 
 fortcake-uikit-v2@fortcake/fortcake-uikit-v2#dev:
   version "0.0.2"
-  resolved "https://codeload.github.com/fortcake/fortcake-uikit-v2/tar.gz/ff7b16b2c5af9a7148cc0a9bdeb756fa91ee24ed"
+  resolved "https://codeload.github.com/fortcake/fortcake-uikit-v2/tar.gz/36889f0e81304523edf5ff35fe4ee56499508c99"
   dependencies:
     "@popperjs/core" "^2.9.2"
     "@types/styled-system" "^5.1.10"

@@ -2,13 +2,12 @@ import React from 'react'
 import { useLocation } from 'react-router'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import { Menu as UikitMenu, Flex, GamesLink, Button, MenuItemsType } from 'fortcake-uikit-v2'
+import { Menu as UikitMenu, Flex, GamesLink } from 'fortcake-uikit-v2'
 import { languageList } from 'config/localization/languages'
 import { useTranslation } from 'contexts/Localization'
 import useTheme from 'hooks/useTheme'
-import config from './config/config'
+import config, { FooterLinks } from './config/config'
 import { getActiveMenuItem, getActiveSubMenuItem } from './utils'
-import { footerLinks } from './config/footerConfig'
 import NewsLetter from '../Newsletter'
 import UserMenu from './UserMenu'
 // import GlobalSettings from './GlobalSettings'
@@ -56,42 +55,17 @@ const HomeLink: React.FC = () => (
   </Flex>
 )
 
-const SubmitGamesNav: MenuItemsType = {
-  label: 'Submit your game',
-  href: 'https://forms.gle/dwGAFXQ9yP8e5VcR8',
-  showOnMobile: false,
-  isExternal: true,
-}
-
 const Menu = (props) => {
   const { isDark, toggleTheme } = useTheme()
   const { currentLanguage, setLanguage, t } = useTranslation()
   const { pathname } = useLocation()
 
-  let menus = config(t)
-  menus = menus.map((menu) =>
-    menu.label === 'Swap'
-      ? {
-          ...menu,
-          href: '/swap',
-          useRouterLink: true,
-        }
-      : menu,
-  )
+  const menuMemo = React.useMemo(() => {
+    const menus = config(t)
+    return pathname === GamesLink.link ? menus : menus.filter(({ label }) => !label.toLowerCase().includes('submit'))
+  }, [t, pathname])
 
-  menus = menus.map((menu) =>
-    menu.label === 'Play'
-      ? {
-          ...menu,
-          href: '/play',
-          useRouterLink: true,
-        }
-      : menu,
-  )
-
-  menus = pathname.includes(GamesLink.link) ? [...menus, SubmitGamesNav] : menus
-
-  const activeMenuItem = getActiveMenuItem({ menuConfig: menus, pathname })
+  const activeMenuItem = getActiveMenuItem({ menuConfig: menuMemo, pathname })
   const activeSubMenuItem = getActiveSubMenuItem({ menuItem: activeMenuItem, pathname })
 
   return (
@@ -102,13 +76,12 @@ const Menu = (props) => {
       currentLang={currentLanguage.code}
       langs={languageList}
       setLang={setLanguage}
-      links={menus}
+      links={menuMemo}
       subLinks={activeMenuItem?.hideSubNav ? [] : activeMenuItem?.items}
-      footerLinks={footerLinks(t)}
-      activeItem={activeMenuItem?.href}
+      footerLinks={FooterLinks(t)}
+      activeItem={pathname}
       activeSubItem={activeSubMenuItem?.href}
       logo={<HomeLink />}
-      isInGamesPage={pathname.includes(GamesLink.link)}
       newsLetterComponent={<NewsLetter />}
       {...props}
     />

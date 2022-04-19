@@ -90,9 +90,9 @@ const SwitchIconButton = styled(IconButton)`
 `
 
 export default function Swap() {
-  const loadedUrlParams = useDefaultsFromURLSearch() // <----------
+  useDefaultsFromURLSearch()
   const { t } = useTranslation()
-  const { isMobile } = useMatchBreakpoints()
+  const { isMobile, isTablet } = useMatchBreakpoints()
 
   // /************************ not needed ************************/
 
@@ -366,7 +366,7 @@ export default function Swap() {
       justifyContent="center"
       alignItems="center"
       position="relative"
-      style={{ minHeight: 'calc(100vh + 60px)' }}
+      style={{ minHeight: isMobile || isTablet ? '80vh' : '100vh' }}
     >
       <Flex flexDirection="column">
         <StyledSwapContainer $isChartExpanded={false}>

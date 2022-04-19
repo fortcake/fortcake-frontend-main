@@ -12,6 +12,7 @@ import {
 } from 'fortcake-uikit-v2'
 import axios from 'axios'
 import { GameImage } from 'components/GameImage'
+import { Link } from 'react-router-dom'
 import { GameProps, ChainProps } from '../types'
 // import Select from '../Select'
 
@@ -105,10 +106,12 @@ const ChainAddress: React.FC<{ chain: ChainProps[] }> = ({ chain }) => {
   //   // eslint-disable-next-line no-unused-expressions
   //   window.open(swapRedirect, '_blank') || window.location.replace(swapRedirect)
   // }
-  const url = `https://${chain[0].chain}.fortcake.io/swap/${chain[0].address}`
+  // const url = `https://${chain[0].chain}.fortcake.io/swap/${chain[0].address}`
+  const url = `/swap/${chain[0].address}`
+
   return (
     <FlexButton className="chainAdress">
-      <Button className="externalLinks" as="a" variant="primary" href={url} scale="sm" mr="20px" target="_blank">
+      <Button className="externalLinks" as={Link} variant="primary" scale="sm" mr="20px" to={url}>
         Swap
       </Button>
       {/* <Select options={options} onOptionChange={handleOptionChange} mr="20px" /> */}
@@ -177,13 +180,13 @@ const Game: React.FunctionComponent<GameProps & { actionPanelOpen: boolean }> = 
               </Flex>
             </Flex>
           </Flex>
-          <Flex justifyContent="flex-end" mt="40px" style={{ width: '100%' }}>
+          <Flex justifyContent="flex-end" mt="20px" style={{ width: '100%' }}>
             <ChainAddress chain={chain} />
             <Button className="externalLinks" as="a" variant="secondary" href={cta} scale="sm">
               Find out more
             </Button>
           </Flex>
-          <Flex justifyContent="center" mt="30px" mb="10px" style={{ width: '100%' }}>
+          <Flex justifyContent="center" mt="18px" mb="10px" style={{ width: '100%' }}>
             {!actionPanelOpen ? (
               <ChevronDownIcon width={25} color="tertiary" />
             ) : (

@@ -1,6 +1,6 @@
-import { MenuItemsType } from 'fortcake-uikit-v2'
+import { MenuItemsType, FooterLinkType } from 'fortcake-uikit-v2'
 import { ContextApi } from 'contexts/Localization/types'
-import { BASE_URL, Nav } from 'fortcake-config-files/dist'
+import { BASE_URL, Nav, FooterLinks as footerLinks } from 'fortcake-config-files/dist'
 
 export type ConfigMenuItemsType = MenuItemsType & { hideSubNav?: boolean }
 
@@ -10,6 +10,12 @@ const config: (t: ContextApi['t']) => ConfigMenuItemsType[] = (t) =>
   Nav.map((menu) => ({ ...menu, href: menu.href, label: t(menu.label) }))
 
 export default config
+
+export const FooterLinks: (t: ContextApi['t']) => FooterLinkType[] = (t) =>
+  footerLinks.map(({ label, items }) => ({
+    label: t(label),
+    items: items.map((subItem) => ({ label: t(subItem.label), href: subItem.href })),
+  }))
 
 export const Socials = [
   {

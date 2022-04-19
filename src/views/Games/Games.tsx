@@ -145,8 +145,8 @@ const Games: React.FC = () => {
               <StyledImage src={LogoCake} width={100} height={78} mt="60px" loading="lazy" className="showOnMobile" />
             </Flex>
             <H2 as="h2" override>
-              Find PLAY-TO-EARN games, Swap tokens, Earn rewards, Trade NFT`s and Join our community! Featuring our most
-              upvoted crypto games all in one place...
+              Find PLAY-TO-EARN games, Swap tokens and join our community! Featuring top crypto games on the Binance
+              Smart Chain...
             </H2>
           </LandingText>
           <StyledImage src={LogoCake} width={430} height={336} mt="20px" loading="lazy" />

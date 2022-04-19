@@ -18,14 +18,18 @@ import PageLoader from './components/Loader/PageLoader'
 import EasterEgg from './components/EasterEgg'
 import GlobalCheckClaimStatus from './components/GlobalCheckClaimStatus'
 import history from './routerHistory'
+import { RedirectToSwap } from './views/Swap/redirects'
+
+import Games from './views/Games'
+import Swap from './views/Swap'
 // import Swap from './views/Swap'
 // Views included in the main bundle
 
 // Route-based code splitting
-// Only pool is included in the main bundle because of it's the most visited page
+// Only Games/Swap is included in the main bundle because of it's the most visited page
 const Home = lazy(() => import('./views/FortCakeHome'))
-const Games = lazy(() => import('./views/Games'))
-const Swap = lazy(() => import('./views/Swap'))
+// const Games = lazy(() => import('./views/Games'))
+// const Swap = lazy(() => import('./views/Swap'))
 
 // This config is required for number formatting
 BigNumber.config({
@@ -58,6 +62,7 @@ const App: React.FC = () => {
               <Games />
             </Route>
             <Route exact strict path="/swap" component={Swap} />
+            <Route exact strict path="/swap/:outputCurrency" component={RedirectToSwap} />
           </Switch>
         </SuspenseWithChunkError>
       </Menu>
