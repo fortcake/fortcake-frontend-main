@@ -4,7 +4,7 @@ import { Svg, SvgProps } from 'fortcake-uikit-v2'
 const SvgComponent: React.FC<SvgProps> = (props) => (
   <Svg viewBox="0 0 500 500" {...props}>
     <defs>
-      <linearGradient id="a" x1={89.3} y1={441.52} x2={410.7} y2={58.48} gradientUnits="userSpaceOnUse">
+      <linearGradient id="bubbles3" x1={89.3} y1={441.52} x2={410.7} y2={58.48} gradientUnits="userSpaceOnUse">
         <stop offset={0} stopColor="#f18e9e" />
         <stop offset={0.17} stopColor="#e4939f" />
         <stop offset={0.49} stopColor="#c09fa1" />
@@ -18,7 +18,7 @@ const SvgComponent: React.FC<SvgProps> = (props) => (
         cy={250}
         r={250}
         style={{
-          fill: 'url(#a)',
+          fill: 'url(#bubbles3)',
         }}
         data-name="Layer 1"
       />
