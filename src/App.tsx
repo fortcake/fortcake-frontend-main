@@ -6,6 +6,7 @@ import BigNumber from 'bignumber.js'
 import useEagerConnect from 'hooks/useEagerConnect'
 import useUserAgent from 'hooks/useUserAgent'
 import useScrollOnRouteChange from 'hooks/useScrollOnRouteChange'
+import useClickyAnalytics from 'hooks/useClickyAnalytics'
 import { usePollBlockNumber } from 'state/block/hooks'
 import { usePollCoreFarmData } from 'state/farms/hooks'
 import { useFetchProfile } from 'state/profile/hooks'
@@ -48,6 +49,7 @@ const App: React.FC = () => {
   useScrollOnRouteChange()
   useUserAgent()
   useFetchGames()
+  useClickyAnalytics()
 
   return (
     <Router history={history}>
