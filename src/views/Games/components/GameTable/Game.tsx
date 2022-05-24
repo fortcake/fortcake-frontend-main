@@ -85,11 +85,11 @@ const Rating: React.FC<{ votes: number }> = ({ votes }) => {
 
   let ratingIcon: string
 
-  if (votes >= 25 && votes <= 49) {
+  if (votes > 24 && votes < 50) {
     ratingIcon = orange
-  } else if (votes >= 50 && votes <= 74) {
+  } else if (votes > 49 && votes < 75) {
     ratingIcon = yellow
-  } else if (votes >= 75) {
+  } else if (votes > 74) {
     ratingIcon = green
   } else {
     ratingIcon = red
@@ -210,7 +210,7 @@ const Game: React.FunctionComponent<GameProps & { actionPanelOpen: boolean }> = 
           <Flex justifyContent="flex-end" mt="20px" style={{ width: '100%' }}>
             <ChainAddress chain={chain} />
             <Button className="externalLinks" as="a" variant="secondary" href={cta} scale="sm">
-              Find out more
+              Play
             </Button>
           </Flex>
           <Flex justifyContent="center" mt="18px" mb="10px" style={{ width: '100%' }}>
@@ -250,7 +250,7 @@ const Game: React.FunctionComponent<GameProps & { actionPanelOpen: boolean }> = 
               <Flex>
                 <ChainAddress chain={chain} />
                 <Button className="externalLinks" as="a" variant="secondary" href={cta} scale="sm">
-                  Find out more
+                  Play
                 </Button>
               </Flex>
             </Flex>

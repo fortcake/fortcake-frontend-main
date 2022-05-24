@@ -1,51 +1,190 @@
 import { MenuItemsType, FooterLinkType } from 'fortcake-uikit-v2'
-import { ContextApi } from 'contexts/Localization/types'
-import { Links, Nav, FooterLinks as footerLinks } from 'fortcake-config-files/dist'
 
-export type ConfigMenuItemsType = MenuItemsType & { hideSubNav?: boolean }
+type socialLinksTypes = {
+  label: string
+  icon: string
+  href: string
+  items?: socialLinksTypes[]
+}
 
-const config: (t: ContextApi['t']) => ConfigMenuItemsType[] = (t) =>
-  Nav.map((menu) => ({ ...menu, href: menu.href, label: t(menu.label) }))
+export enum Links {
+  BASE_URL = 'fortcake.io',
+  GAMES = '/play',
+  BNB = '/swap',
+  COOKIES = '/legal/cookies',
+  PRIVACY = '/legal/privacy',
+  TERMS = '/legal/terms',
+  SUBMITGAME = 'https://forms.gle/dwGAFXQ9yP8e5VcR8',
+  TWITTER = 'https://twitter.com/fortcake',
+  TELEGRAM = 'https://t.me/joinchat/iPHYn9_M_cxiMTMx',
+  REDDIT = 'https://www.reddit.com/user/fortcakeofficial',
+  INSTAGRAM = 'https://www.instagram.com/fortcake_official/',
+  GITHUB = 'https://github.com/fortcake/',
+  DISCORD = 'https://discord.com/invite/FAqUbJXzN9',
+  GOVERNANCE = 'https://snapshot.org/#/fortcake.eth/about',
+  GUIDES = 'https://fortcake.gitbook.io/fortcake/',
+  FAQ = 'https://fortcake.gitbook.io/fortcake/10.-faq',
+  TOKEN = 'https://fortcake.gitbook.io/fortcake/',
+  BLOG = 'https://fortcake.medium.com/',
+  BSCSCAN = 'https://bscscan.com/token/0x2f477a472f4657f7917126a663b5affe94d5a2b6',
+}
 
-export default config
+export const Nav: MenuItemsType[] = [
+  {
+    label: 'Home',
+    href: `https://${Links.BASE_URL}`,
+    icon: 'Home',
+  },
+  {
+    label: 'Play',
+    href: Links.GAMES,
+    icon: 'Nft',
+    useRouterLink: true,
+  },
+  {
+    label: 'Swap',
+    href: Links.BNB,
+    icon: 'Swap',
+    useRouterLink: true,
+  },
+  {
+    label: 'Community',
+    href: Links.DISCORD,
+    icon: 'Groups',
+  },
+  {
+    label: 'Submit your game',
+    href: Links.SUBMITGAME,
+    showOnMobile: false,
+    isExternal: true,
+  },
+]
 
-export const FooterLinks: (t: ContextApi['t']) => FooterLinkType[] = (t) =>
-  footerLinks.map(({ label, items }) => ({
-    label: t(label),
-    items: items.map((subItem) => ({ label: t(subItem.label), href: subItem.href })),
-  }))
-
-export const Socials = [
+export const Socials: socialLinksTypes[] = [
   {
     label: 'Twitter',
+    icon: 'Twitter',
     href: Links.TWITTER,
   },
   {
-    label: 'Discord',
-    href: Links.DISCORD,
+    label: 'Telegram',
+    icon: 'Telegram',
+    href: Links.TELEGRAM,
+  },
+  {
+    label: 'Reddit',
+    icon: 'Reddit',
+    href: Links.REDDIT,
   },
   {
     label: 'Instagram',
+    icon: 'Instagram',
     href: Links.INSTAGRAM,
   },
   {
-    label: 'Medium',
-    href: Links.BLOG,
+    label: 'Github',
+    icon: 'Github',
+    href: Links.GITHUB,
   },
   {
-    label: 'BscScan',
-    href: Links.BSCSCAN,
+    label: 'Discord',
+    icon: 'Discord',
+    href: Links.DISCORD,
+  },
+]
+
+export const FooterLinks: Array<FooterLinkType> = [
+  {
+    label: 'Ecosystem',
+    items: [
+      {
+        label: 'Play',
+        href: Links.GAMES,
+        useRouterLink: true,
+      },
+      {
+        label: 'Swap',
+        href: Links.BNB,
+        useRouterLink: true,
+      },
+      {
+        label: 'Governance',
+        href: Links.GOVERNANCE,
+      },
+      {
+        label: 'Submit your game',
+        href: Links.SUBMITGAME,
+      },
+      {
+        label: 'Community',
+        href: Links.DISCORD,
+      },
+    ],
   },
   {
-    label: 'PancakeSwap',
-    href: 'https://pancakeswap.finance/',
+    label: 'Help',
+    items: [
+      {
+        label: 'Guides',
+        href: Links.GUIDES,
+      },
+      {
+        label: 'FAQ',
+        href: Links.FAQ,
+      },
+      {
+        label: 'Cookies Policy',
+        href: Links.COOKIES,
+        isExternal: false,
+      },
+      {
+        label: 'Privacy Policy',
+        href: Links.PRIVACY,
+        isExternal: false,
+      },
+      {
+        label: 'Terms of Service',
+        href: Links.TERMS,
+        isExternal: false,
+      },
+    ],
   },
   {
-    label: 'CoinGecko',
-    href: 'https://www.coingecko.com/',
+    label: 'Token',
+    items: [
+      {
+        label: 'Whitepaper',
+        href: Links.TOKEN,
+      },
+      {
+        label: 'Blog',
+        href: Links.BLOG,
+      },
+      {
+        label: 'BSC Scan',
+        href: Links.BSCSCAN,
+      },
+    ],
   },
   {
-    label: 'Telegram',
-    href: Links.TELEGRAM,
+    label: 'Social',
+    items: [
+      {
+        label: 'Twitter',
+        href: Links.TWITTER,
+      },
+      {
+        label: 'Telegram',
+        href: Links.TELEGRAM,
+      },
+      {
+        label: 'Instagram',
+        href: Links.INSTAGRAM,
+      },
+      {
+        label: 'Discord',
+        href: Links.DISCORD,
+      },
+    ],
   },
 ]

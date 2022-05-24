@@ -59,7 +59,6 @@
     "easymde": "^2.15.0",
     "ethers": "^5.5.2",
     "fast-json-stable-stringify": "^2.1.0",
-    "fortcake-config-files": "fortcake/fortcake-config-files",
     "fortcake-uikit-v2": "fortcake/fortcake-uikit-v2",
     "graphql": "^15.5.0",
     "graphql-request": "^3.4.0",

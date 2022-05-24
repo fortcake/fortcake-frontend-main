@@ -1,10 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Heading as PancakeHeading, Image, Flex, ImageProps, Link } from 'fortcake-uikit-v2'
+import { Heading as PancakeHeading, Image, Flex, ImageProps, Link, LinkExternal, Text } from 'fortcake-uikit-v2'
+import abstractBg from 'assets/images/abstract.svg'
 
 export const Heading = styled(PancakeHeading)<{ override?: boolean }>`
   color: ${({ theme, override }) => (override ? theme.colors.text : theme.colors.secondary)};
-  /* text-shadow: 0 0 4px lightseagreen; */
 `
 
 export const Section = styled.section`
@@ -13,56 +13,92 @@ export const Section = styled.section`
   display: flex;
   flex-direction: column;
   padding: 20px;
-  ${({ theme }) => theme.mediaQueries.md} {
-    padding: 36px 20px;
-    margin-bottom: 40px;
-  }
-  ${({ theme }) => theme.mediaQueries.xl} {
-    padding: 36px 0;
-  }
-  h2,
-  h3 {
-    text-align: center;
-  }
-  &.landingSection,
-  &.featuresSection {
-    min-height: calc(100vh - 80px);
-    h4 {
-      line-height: 1.5;
+  max-width: 1200px;
+  margin-inline: auto;
+  min-height: 60vh;
+  a {
+    transition: opacity 0.2s ease;
+    &:hover {
+      opacity: 0.6;
     }
   }
+
+  h4 {
+    line-height: 1.6;
+  }
+
+  &.featuresSection {
+    justify-content: space-evenly;
+    padding: 0;
+    margin-bottom: 20px;
+  }
+
   &.landingSection {
-    justify-content: flex-end;
-    padding: 8vh 0;
+    justify-content: center;
+    padding: 5vh 0;
+    min-height: calc(100vh - 80px);
+    /* position: relative; */
+    &::after {
+      content: '';
+      position: absolute;
+      margin-inline: auto;
+      width: 200%;
+      height: clamp(11%, 15%, 100vh);
+      top: 0;
+      left: 0;
+      right: 0;
+      background-image: url(${abstractBg});
+      background-size: contain;
+      background-position: center center;
+      background-repeat: no-repeat;
+      z-index: -10;
+      opacity: 0.3;
+    }
+
     .socialLinks {
       width: 100%;
       margin: 6vh 0;
-      ${({ theme }) => theme.mediaQueries.md} {
-        width: 75%;
-        align-self: flex-start;
-      }
     }
     .cta {
       width: 100%;
       justify-content: space-evenly;
-      ${({ theme }) => theme.mediaQueries.md} {
-        justify-content: flex-start;
-      }
     }
   }
-  &.featuresSection {
-    justify-content: space-evenly;
-    padding: 0;
-  }
+
   &.participateSection {
     min-height: 50vh;
     padding-top: 0;
     justify-content: flex-start;
   }
+
+  ${({ theme }) => theme.mediaQueries.md} {
+    padding: 36px 20px;
+    &.landingSection {
+      &::after {
+        width: min(100%, 1500px);
+        height: clamp(11%, 14%, 20%);
+      }
+      .socialLinks {
+        width: 75%;
+        align-self: flex-start;
+      }
+      .cta {
+        justify-content: flex-start;
+      }
+    }
+    &.featuresSection {
+      margin-bottom: 0;
+    }
+  }
+
+  ${({ theme }) => theme.mediaQueries.xl} {
+    padding: 36px 0;
+  }
 `
 
 export const SectionFlex = styled(Flex)`
   max-width: 1200px;
+  min-width: 100%;
   align-items: center;
   justify-content: space-evenly;
   .imgHideOnMobile {
@@ -74,7 +110,7 @@ export const SectionFlex = styled(Flex)`
     }
   }
   &.address {
-    min-height: 21vh;
+    min-height: 12vh;
     align-items: flex-end;
     flex-direction: column;
     width: 100%;
@@ -107,33 +143,35 @@ export const SectionFlex = styled(Flex)`
     }
     ${({ theme }) => theme.mediaQueries.md} {
       flex-direction: row;
+      align-items: flex-start;
     }
   }
   &.participate {
     flex-direction: column;
-    margin: 20px 0;
-    padding: 0 20px;
-    ${({ theme }) => theme.mediaQueries.md} {
-      margin: 0;
-    }
+    margin: 60px 0 40px;
     h2 {
       margin-bottom: 10px;
       text-align: left;
-      ${({ theme }) => theme.mediaQueries.md} {
-        text-align: center;
-      }
+    }
+    h4 {
+      font-weight: 400;
     }
     h2,
     h4 {
       width: 100%;
-      line-height: 1.5;
     }
     ${({ theme }) => theme.mediaQueries.md} {
       max-width: 55%;
+      h2,
+      h4 {
+        text-align: center;
+      }
     }
   }
   &.tokenomics {
     flex-direction: column;
+    max-width: 100%;
+    margin-bottom: 40px;
     &.reversed {
       flex-direction: column-reverse;
     }
@@ -146,7 +184,7 @@ export const SectionFlex = styled(Flex)`
   }
   &.grid {
     > div {
-      margin-bottom: 20px;
+      margin-bottom: 40px;
       ${({ theme }) => theme.mediaQueries.md} {
         display: flex;
         flex-direction: column;
@@ -162,14 +200,16 @@ export const SectionFlex = styled(Flex)`
   }
   &.small {
     > div:first-child {
-      max-width: 250px;
-      max-height: 204px;
-    }
-    ${({ theme }) => theme.mediaQueries.sm} {
-      > div:first-child {
-        max-width: 400px;
-        max-height: 326px;
+      max-width: 360px;
+      max-height: 360px;
+      margin: -40px auto 40px;
+      ${({ theme }) => theme.mediaQueries.sm} {
+        max-width: 460px;
+        max-height: 460px;
       }
+    }
+    > div:last-child {
+      width: 100%;
     }
   }
 `
@@ -187,6 +227,7 @@ export const Features = styled(Flex)`
   flex-direction: column;
   padding: 20px;
   text-align: center;
+  width: min(100%, 320px);
   > div {
     margin-bottom: 20px;
   }
@@ -210,6 +251,14 @@ export const SocialLink = styled(Link)`
   }
 `
 
+export const ExternalLink = styled(LinkExternal)`
+  display: inline-flex;
+`
+
 export const LazyImage: React.FC<ImageProps> = ({ height, width, src, className, ...props }) => (
   <Image loading="lazy" height={height} width={width} src={src} className={className} {...props} />
 )
+
+export const StyledText = styled(Text)`
+  line-height: 1.6;
+`

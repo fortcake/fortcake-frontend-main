@@ -11,6 +11,7 @@ import { usePollBlockNumber } from 'state/block/hooks'
 import { usePollCoreFarmData } from 'state/farms/hooks'
 import { useFetchProfile } from 'state/profile/hooks'
 import { useFetchGames } from 'state/games/hooks'
+import { useShowCookiesNotice } from 'state/user/hooks'
 import SubgraphHealthIndicator from 'components/SubgraphHealthIndicator'
 import GlobalStyle from './style/Global'
 import Menu from './components/Menu'
@@ -24,6 +25,7 @@ import { RedirectToSwap } from './views/Swap/redirects'
 
 import Games from './views/Games'
 import Swap from './views/Swap'
+import Legal from './views/Legal'
 // import Swap from './views/Swap'
 // Views included in the main bundle
 
@@ -50,6 +52,7 @@ const App: React.FC = () => {
   useUserAgent()
   useFetchGames()
   useClickyAnalytics()
+  useShowCookiesNotice()
 
   return (
     <Router history={history}>
@@ -65,6 +68,7 @@ const App: React.FC = () => {
             <Route path="/play">
               <Games />
             </Route>
+            <Route exact strict path="/legal/:policy" component={Legal} />
             <Route exact strict path="/swap" component={Swap} />
             <Route exact strict path="/swap/:outputCurrency" component={RedirectToSwap} />
           </Switch>

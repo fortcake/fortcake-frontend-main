@@ -1,10 +1,11 @@
 import { ChainId, Pair, Token } from '@pancakeswap/sdk'
 import flatMap from 'lodash/flatMap'
-import { useCallback, useMemo } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { BASES_TO_TRACK_LIQUIDITY_FOR, PINNED_PAIRS } from 'config/constants'
 import useActiveWeb3React from 'hooks/useActiveWeb3React'
 import { useAllTokens } from 'hooks/Tokens'
+import CookiesNotice from 'components/CookiesNotice'
 import { AppDispatch, AppState } from '../../index'
 import {
   addSerializedPair,
@@ -487,3 +488,22 @@ export const useWatchlistPools = (): [string[], (address: string) => void] => {
   )
   return [savedPools, updateSavedPools]
 }
+
+export const useShowCookiesNotice = () => {
+  const { userAcceptedCookies } = useSelector<AppState, AppState['user']>((state) => state.user)
+  const [presentModal] = CookiesNotice()
+  const [state, setState] = useState(userAcceptedCookies)
+
+  const handler = useCallback(() => {
+    if (!state) {
+      presentModal()
+      setState(true)
+    }
+  }, [presentModal, state])
+
+  useEffect(() => {
+    handler()
+  }, [handler])
+}
+
+export const useUserSelector = () => useSelector<AppState, AppState['user']>((state) => state.user)

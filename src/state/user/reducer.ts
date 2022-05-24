@@ -33,6 +33,7 @@ import {
   setChartViewMode,
   ChartViewMode,
   setSubgraphHealthIndicatorDisplayed,
+  setAcceptedCookie,
 } from './actions'
 import { GAS_PRICE_GWEI } from './hooks/helpers'
 
@@ -84,6 +85,7 @@ export interface UserState {
   watchlistTokens: string[]
   watchlistPools: string[]
   showPhishingWarningBanner: boolean
+  userAcceptedCookies: boolean
 }
 
 function pairKey(token0Address: string, token1Address: string) {
@@ -115,6 +117,7 @@ export const initialState: UserState = {
   watchlistTokens: [],
   watchlistPools: [],
   showPhishingWarningBanner: true,
+  userAcceptedCookies: false,
 }
 
 export default createReducer(initialState, (builder) =>
@@ -253,5 +256,8 @@ export default createReducer(initialState, (builder) =>
     })
     .addCase(setSubgraphHealthIndicatorDisplayed, (state, { payload }) => {
       state.isSubgraphHealthIndicatorDisplayed = payload
+    })
+    .addCase(setAcceptedCookie, (state) => {
+      state.userAcceptedCookies = true
     }),
 )
