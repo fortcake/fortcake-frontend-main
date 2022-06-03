@@ -89,7 +89,7 @@ const Home: React.FC = () => {
             </Heading>
             <Box width="100%" mt={20}>
               <Text mb={2} fontSize="14px" ml="4px">
-                Fortcake Contract Address:
+                FORTCAKE Contract Address:
               </Text>
               <AddressComponent address={FORTCAKE_ADDRESS} />
             </Box>
@@ -158,7 +158,7 @@ const Home: React.FC = () => {
               <Earn width={90} height={90} fill={isDark ? dark.colors.secondary : dark.colors.primary} />
               <Heading as="h4">Earn</Heading>
             </a>
-            <Text>Earn $Fortcake by staking.</Text>
+            <Text>Earn $FORTCAKE by staking.</Text>
           </Features>
           <Features>
             <a href="https://fortcake.gitbook.io/fortcake/3.-core-features" target="_blank" rel="noreferrer">
@@ -186,8 +186,7 @@ const Home: React.FC = () => {
           </Heading>
           <Heading as="h4" scale="lg" override>
             $FORTCAKE is coming soon to PancakeSwap, and will be found on launchpads as well as a future list of
-            exchanges. $FORTCAKE is a cryptocurrency gaming token and, as such, we always encourage the use of
-            decentralized exchanges.
+            exchanges.
           </Heading>
         </SectionFlex>
       </Section>
@@ -200,7 +199,7 @@ const Home: React.FC = () => {
               Quick Start Guide
             </Heading>
             <Heading as="h4" scale="lg" override style={{ fontWeight: 'normal' }} mb={30} width="100%">
-              Follow these guides to get started using Fortcake
+              Follow these guides to get started using FORTCAKE
             </Heading>
             <ListWrapper>
               <ListItems>
@@ -208,7 +207,7 @@ const Home: React.FC = () => {
                   1. Create your wallet
                 </Heading>
                 <Text>
-                  To get started on Fortcake, the first thing you&#39;ll need is to set up a wallet that supports BNB
+                  To get started on FORTCAKE, the first thing you&#39;ll need is to set up a wallet that supports BNB
                   Smart Chain (BSC). Wallets are available both on desktop computers and on smartphone devices.
                   You&#39;ll need to choose the wallet that fits your needs best. Follow &nbsp;
                   <ExternalLink href="https://fortcake.gitbook.io/fortcake/get-started/create-a-wallet">
@@ -231,11 +230,11 @@ const Home: React.FC = () => {
               </ListItems>
               <ListItems>
                 <Heading as="h4" scale="lg">
-                  3. Connect your wallet to Fortcake
+                  3. Connect your wallet to FORTCAKE
                 </Heading>
                 <Text>
                   You&#39;ve made a wallet and gotten your BEP-20 tokens, now you just need to connect your wallet with
-                  Fortcake and you&#39;re good to go! Follow&nbsp;
+                  FORTCAKE and you&#39;re good to go! Follow&nbsp;
                   <ExternalLink href="https://fortcake.gitbook.io/fortcake/get-started/connect-your-wallet-to-fortcake">
                     this guide
                   </ExternalLink>
@@ -277,7 +276,7 @@ const Home: React.FC = () => {
               Featuring the top Binance Smartchain (BNB) play to earn games. Each game is connected to our built in swap
               feature, where you can choose any game you like and swap with a click of a button. By default each game is
               sorted and rated with an algorithmically calculated real time technology that we developed called the
-              “Fortcake Score Meter” All the games are rated fairly based on Coingecko score, Community score, Liquidity
+              “FORTCAKE Score Meter” All the games are rated fairly based on Coingecko score, Community score, Liquidity
               score.
             </Text>
           </Box>
@@ -307,7 +306,7 @@ const Home: React.FC = () => {
             <Text>
               <Box>
                 <Text>
-                  Participants will soon be able to earn $Fortcake by staking, the more you stake the more you earn!
+                  Participants will soon be able to earn $FORTCAKE by staking, the more you stake the more you earn!
                 </Text>
               </Box>
             </Text>
