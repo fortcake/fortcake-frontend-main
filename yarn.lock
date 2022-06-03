@@ -10831,8 +10831,8 @@ form-data@~2.3.2:
     mime-types "^2.1.12"
 
 fortcake-uikit-v2@fortcake/fortcake-uikit-v2:
-  version "0.0.35"
-  resolved "https://codeload.github.com/fortcake/fortcake-uikit-v2/tar.gz/43ec530acf5a108cddc1e29956187e7f712eca86"
+  version "0.0.36"
+  resolved "https://codeload.github.com/fortcake/fortcake-uikit-v2/tar.gz/a8ab19e28c9c97c5d0194e9a0f8a50bbf433db21"
   dependencies:
     "@popperjs/core" "^2.9.2"
     "@types/styled-system" "^5.1.10"

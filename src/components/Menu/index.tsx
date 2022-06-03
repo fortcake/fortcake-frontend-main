@@ -7,6 +7,7 @@ import { languageList } from 'config/localization/languages'
 import { useTranslation } from 'contexts/Localization'
 import useTheme from 'hooks/useTheme'
 import config, { FooterLinks } from './config'
+import { Socials } from './config/config'
 import { getActiveMenuItem, getActiveSubMenuItem } from './utils'
 import NewsLetter from '../Newsletter'
 import UserMenu from './UserMenu'
@@ -64,6 +65,7 @@ const Menu = (props) => {
       activeSubItem={activeSubMenuItem?.href}
       logo={<HomeLink />}
       newsLetterComponent={<NewsLetter />}
+      socialLinks={Socials}
       {...props}
     />
   )
@@ -84,6 +86,7 @@ export const CustomFooter = () => {
       currentLang={currentLanguage.code}
       langs={languageList}
       setLang={setLanguage}
+      socialLinks={Socials}
       pb={['84px', null, '40px']}
     />
   )

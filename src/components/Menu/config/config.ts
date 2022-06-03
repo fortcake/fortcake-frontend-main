@@ -67,11 +67,6 @@ export const Socials: socialLinksTypes[] = [
     href: Links.TWITTER,
   },
   {
-    label: 'Telegram',
-    icon: 'Telegram',
-    href: Links.TELEGRAM,
-  },
-  {
     label: 'Reddit',
     icon: 'Reddit',
     href: Links.REDDIT,
@@ -172,10 +167,6 @@ export const FooterLinks: Array<FooterLinkType> = [
       {
         label: 'Twitter',
         href: Links.TWITTER,
-      },
-      {
-        label: 'Telegram',
-        href: Links.TELEGRAM,
       },
       {
         label: 'Instagram',
