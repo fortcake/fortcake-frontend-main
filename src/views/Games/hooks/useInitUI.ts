@@ -27,9 +27,9 @@ function scrollDirection(elem) {
 
 export default (ref: MutableRefObject<any>) => {
   useEffect(() => {
-    const root = document.getElementById('root')
-    const parent = root.firstChild.childNodes[1]
-    const child = parent.firstChild
+    const root = document.getElementById('__next')
+    const parent = root.lastChild.childNodes[1];
+    const child = parent.firstChild;
     const footer = child.lastChild as HTMLElement
     const element = ref.current
 

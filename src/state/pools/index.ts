@@ -176,13 +176,24 @@ export const fetchPoolsStakingLimitsAsync = () => async (dispatch, getState) => 
   dispatch(setPoolsPublicData(stakingLimitData))
 }
 
-export const fetchPoolsUserDataAsync =
-  (account: string): AppThunk =>
-  async (dispatch) => {
-    const allowances = await fetchPoolsAllowance(account)
-    const stakingTokenBalances = await fetchUserBalances(account)
-    const stakedBalances = await fetchUserStakeBalances(account)
-    const pendingRewards = await fetchUserPendingRewards(account)
+export const fetchPoolsUserDataAsync = createAsyncThunk<
+  {
+    sousId: number;
+    allowance: any;
+    stakingTokenBalance: any;
+    stakedBalance: any;
+    pendingReward: any;
+  }[],
+  string
+>("pool/fetchPoolsUserData", async (account, { rejectWithValue }) => {
+  try {
+    const [allowances, stakingTokenBalances, stakedBalances, pendingRewards] =
+      await Promise.all([
+        fetchPoolsAllowance(account),
+        fetchUserBalances(account),
+        fetchUserStakeBalances(account),
+        fetchUserPendingRewards(account),
+      ]);
 
     const userData = poolsConfig.map((pool) => ({
       sousId: pool.sousId,
@@ -190,10 +201,12 @@ export const fetchPoolsUserDataAsync =
       stakingTokenBalance: stakingTokenBalances[pool.sousId],
       stakedBalance: stakedBalances[pool.sousId],
       pendingReward: pendingRewards[pool.sousId],
-    }))
-
-    dispatch(setPoolsUserData(userData))
+    }));
+    return userData;
+  } catch (e) {
+    return rejectWithValue(e);
   }
+});
 
 export const updateUserAllowance =
   (sousId: number, account: string): AppThunk =>

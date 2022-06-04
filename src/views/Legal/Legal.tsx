@@ -1,5 +1,4 @@
 import React, { useEffect, useRef } from 'react'
-import { RouteComponentProps } from 'react-router-dom'
 import styled from 'styled-components'
 import { Flex as Div } from 'fortcake-uikit-v2'
 import useTheme from 'hooks/useTheme'
@@ -14,26 +13,25 @@ const Box = styled(Div)`
   align-items: center;
 `
 
-const Legal = (props: RouteComponentProps<{ policy: string }>) => {
-  const {
-    match: {
-      params: { policy },
-    },
-  } = props
-
+const Legal: React.FC<{ policy: string }> = ({ policy }) => {
   const { isDark, toggleTheme } = useTheme()
   // TODO scrollTo func (clicking on hashlinks of iframe table of contents) within iframe not working when using router link
   // const [initState, setState] = useState(false)
-  const termlyId = policy === 'cookies' ? TERMLY_ID_COOKIE : policy === 'privacy' ? TERMLY_ID_PRIVACY : TERMLY_ID_TERMS
+  const termlyId =
+    policy === 'cookies'
+      ? TERMLY_ID_COOKIE
+      : policy === 'privacy'
+      ? TERMLY_ID_PRIVACY
+      : TERMLY_ID_TERMS
 
   const ele = useRef(null)
 
   useEffect(() => {
     if (isDark) {
       // setState(true)
-      toggleTheme()
+      toggleTheme(!isDark)
     }
-    return () => !isDark && toggleTheme()
+    return () => !isDark && toggleTheme(!isDark)
   }, [isDark, toggleTheme])
 
   useEffect(() => {
@@ -64,7 +62,7 @@ const Legal = (props: RouteComponentProps<{ policy: string }>) => {
     }
   }, [policy])
 
-  return <Box ref={ele} data-id={termlyId} data-type="iframe" />
+  return <Box ref={ele} data-id={termlyId} data-type='iframe' />
 }
 
 export default Legal

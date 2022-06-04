@@ -1,33 +1,36 @@
-import React, { useMemo, ReactNode } from 'react'
-import ReactDOM from 'react-dom'
+import React, { useMemo, ReactNode } from "react";
 // import * as Sentry from '@sentry/react'
 // import { Integrations } from '@sentry/tracing'
 // import { isUserRejected } from 'utils/sentry'
-import useActiveWeb3React from './hooks/useActiveWeb3React'
-import { BLOCKED_ADDRESSES } from './config/constants'
-import ListsUpdater from './state/lists/updater'
-import MulticallUpdater from './state/multicall/updater'
-import TransactionUpdater from './state/transactions/updater'
-import App from './App'
-import Providers from './Providers'
+import useActiveWeb3React from "./hooks/useActiveWeb3React";
+import { BLOCKED_ADDRESSES } from "./config/constants";
+import ListsUpdater from "./state/lists/updater";
+import MulticallUpdater from "./state/multicall/updater";
+import TransactionUpdater from "./state/transactions/updater";
+// import App from './pages/App'
+// import Providers from './Providers'
 
-function Updaters() {
+export function Updaters() {
   return (
     <>
-      <ListsUpdater />
-      <TransactionUpdater />
-      <MulticallUpdater />
+      {/* <ListsUpdater />
+      <TransactionUpdater /> */}
+      {/* <MulticallUpdater /> */}
     </>
-  )
+  );
 }
 
-function Blocklist({ children }: { children: ReactNode }) {
-  const { account } = useActiveWeb3React()
-  const blocked: boolean = useMemo(() => Boolean(account && BLOCKED_ADDRESSES.indexOf(account) !== -1), [account])
+export function Blocklist({ children }: { children: ReactNode }) {
+  const { account } = useActiveWeb3React();
+
+  const blocked: boolean = useMemo(
+    () => Boolean(account && BLOCKED_ADDRESSES.indexOf(account) !== -1),
+    [account]
+  );
   if (blocked) {
-    return <div>Blocked address</div>
+    return <div>Blocked address</div>;
   }
-  return <>{children}</>
+  return <>{children}</>;
 }
 
 // Sentry.init({
@@ -58,14 +61,14 @@ function Blocklist({ children }: { children: ReactNode }) {
 //   ],
 // })
 
-ReactDOM.render(
-  <React.StrictMode>
-    <Blocklist>
-      <Providers>
-        <Updaters />
-        <App />
-      </Providers>
-    </Blocklist>
-  </React.StrictMode>,
-  document.getElementById('root'),
-)
+// ReactDOM.render(
+//   <React.StrictMode>
+//     <Blocklist>
+//       <Providers>
+//         <Updaters />
+//         <App />
+//       </Providers>
+//     </Blocklist>
+//   </React.StrictMode>,
+//   document.getElementById('root'),
+// )

@@ -1,18 +1,20 @@
-import React from 'react'
-import { useLocation } from 'react-router'
-import { Link } from 'react-router-dom'
-import styled from 'styled-components'
-import { Menu as UikitMenu, Flex, GamesLink, Footer } from 'fortcake-uikit-v2'
-import { languageList } from 'config/localization/languages'
-import { useTranslation } from 'contexts/Localization'
-import useTheme from 'hooks/useTheme'
-import config, { FooterLinks } from './config'
-import { Socials } from './config/config'
-import { getActiveMenuItem, getActiveSubMenuItem } from './utils'
-import NewsLetter from '../Newsletter'
-import UserMenu from './UserMenu'
+import React from "react";
+// import { useLocation } from 'react-router'
+// import { Link } from 'react-router-dom'
+import { NextLinkFromReactRouter } from "components/NextLink";
+import styled from "styled-components";
+import { useRouter } from "next/router";
+import { Menu as UikitMenu, Flex, GamesLink, Footer } from "fortcake-uikit-v2";
+import { languageList } from "config/localization/languages";
+import { useTranslation } from "contexts/Localization";
+import useTheme from "hooks/useTheme";
+import config, { FooterLinks } from "./config";
+import { Socials } from "./config/config";
+import { getActiveMenuItem, getActiveSubMenuItem } from "./utils";
+import NewsLetter from "../Newsletter";
+import UserMenu from "./UserMenu";
 
-import LogoMain from '../../assets/images/logo/logo_main.png'
+// import LogoMain from "../../assets/images/logo/logo_main.png";
 
 const LogoImg = styled.img`
   width: 35vw;
@@ -25,34 +27,46 @@ const LogoImg = styled.img`
   ${({ theme }) => theme.mediaQueries.xl} {
     width: 12vw;
   }
-`
-
-const DappLink: React.FC = () => <UserMenu />
+`;
 
 const HomeLink: React.FC = () => (
   <Flex alignItems="center">
-    <Link to="/">
-      <LogoImg src={LogoMain} />
-    </Link>
+    <NextLinkFromReactRouter to="/">
+      <LogoImg alt="Fortcake Logo" src="/images/logo_main.png" />
+    </NextLinkFromReactRouter>
   </Flex>
-)
+);
 
 const Menu = (props) => {
-  const { isDark, toggleTheme } = useTheme()
-  const { currentLanguage, setLanguage, t } = useTranslation()
-  const { pathname } = useLocation()
+  const { isDark, toggleTheme } = useTheme();
+  const { currentLanguage, setLanguage, t } = useTranslation();
+  const { pathname } = useRouter();
 
   const menuMemo = React.useMemo(() => {
-    const menus = config(t)
-    return pathname === GamesLink.link ? menus : menus.filter(({ label }) => !label.toLowerCase().includes('submit'))
-  }, [t, pathname])
+    const menus = config(t);
+    return pathname === GamesLink.link
+      ? menus
+      : menus.filter(({ label }) => !label.toLowerCase().includes("submit"));
+  }, [t, pathname]);
 
-  const activeMenuItem = getActiveMenuItem({ menuConfig: menuMemo, pathname })
-  const activeSubMenuItem = getActiveSubMenuItem({ menuItem: activeMenuItem, pathname })
+  const activeMenuItem = getActiveMenuItem({ menuConfig: menuMemo, pathname });
+  const activeSubMenuItem = getActiveSubMenuItem({
+    menuItem: activeMenuItem,
+    pathname,
+  });
 
   return (
     <UikitMenu
-      userMenu={<DappLink />}
+      linkComponent={(linkProps) => {
+        return (
+          <NextLinkFromReactRouter
+            to={linkProps.href}
+            {...linkProps}
+            prefetch={false}
+          />
+        );
+      }}
+      userMenu={<UserMenu />}
       isDark={isDark}
       toggleTheme={toggleTheme}
       currentLang={currentLanguage.code}
@@ -68,14 +82,14 @@ const Menu = (props) => {
       socialLinks={Socials}
       {...props}
     />
-  )
-}
+  );
+};
 
-export default Menu
+export default Menu;
 
 export const CustomFooter = () => {
-  const { isDark, toggleTheme } = useTheme()
-  const { currentLanguage, setLanguage, t } = useTranslation()
+  const { isDark, toggleTheme } = useTheme();
+  const { currentLanguage, setLanguage, t } = useTranslation();
   return (
     <Footer
       items={FooterLinks(t)}
@@ -87,7 +101,7 @@ export const CustomFooter = () => {
       langs={languageList}
       setLang={setLanguage}
       socialLinks={Socials}
-      pb={['84px', null, '40px']}
+      pb={["84px", null, "40px"]}
     />
-  )
-}
+  );
+};

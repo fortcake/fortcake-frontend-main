@@ -1,11 +1,19 @@
-import React from 'react'
-import styled from 'styled-components'
-import { Heading as PancakeHeading, Image, Flex, ImageProps, Link, LinkExternal, Text } from 'fortcake-uikit-v2'
-import abstractBg from 'assets/images/abstract.svg'
+import React from "react";
+import styled from "styled-components";
+import {
+  Heading as PancakeHeading,
+  Flex,
+  Link,
+  LinkExternal,
+  Text,
+} from "fortcake-uikit-v2";
+import Image, { ImageProps } from "next/image";
+import abstractBg from "assets/images/abstract.svg";
 
 export const Heading = styled(PancakeHeading)<{ override?: boolean }>`
-  color: ${({ theme, override }) => (override ? theme.colors.text : theme.colors.secondary)};
-`
+  color: ${({ theme, override }) =>
+    override ? theme.colors.text : theme.colors.secondary};
+`;
 
 export const Section = styled.section`
   justify-content: center;
@@ -39,7 +47,7 @@ export const Section = styled.section`
     min-height: calc(100vh - 80px);
     /* position: relative; */
     &::after {
-      content: '';
+      content: "";
       position: absolute;
       margin-inline: auto;
       width: 200%;
@@ -47,7 +55,7 @@ export const Section = styled.section`
       top: 0;
       left: 0;
       right: 0;
-      background-image: url(${abstractBg});
+      background-image: url(${abstractBg.src});
       background-size: contain;
       background-position: center center;
       background-repeat: no-repeat;
@@ -94,7 +102,7 @@ export const Section = styled.section`
   ${({ theme }) => theme.mediaQueries.xl} {
     padding: 36px 0;
   }
-`
+`;
 
 export const SectionFlex = styled(Flex)`
   max-width: 1200px;
@@ -103,6 +111,7 @@ export const SectionFlex = styled(Flex)`
   justify-content: space-evenly;
   .imgHideOnMobile {
     display: none;
+    align-self: flex-start;
   }
   .imgShowOnMobile {
     ${({ theme }) => theme.mediaQueries.md} {
@@ -212,14 +221,14 @@ export const SectionFlex = styled(Flex)`
       width: 100%;
     }
   }
-`
+`;
 
 export const PageHeader = styled.div`
   padding: 0 20px;
   ${({ theme }) => theme.mediaQueries.xl} {
     padding: 0;
   }
-`
+`;
 
 export const Features = styled(Flex)`
   justify-content: center;
@@ -231,17 +240,17 @@ export const Features = styled(Flex)`
   > div {
     margin-bottom: 20px;
   }
-`
+`;
 
 export const ListWrapper = styled.ul`
   text-align: start;
   padding: 0;
-`
+`;
 
 export const ListItems = styled.li`
   list-style-type: none;
   margin-bottom: 20px;
-`
+`;
 
 export const SocialLink = styled(Link)`
   width: 100%;
@@ -249,16 +258,30 @@ export const SocialLink = styled(Link)`
   ${({ theme }) => theme.mediaQueries.md} {
     justify-content: flex-start;
   }
-`
+`;
 
 export const ExternalLink = styled(LinkExternal)`
   display: inline-flex;
-`
+`;
 
-export const LazyImage: React.FC<ImageProps> = ({ height, width, src, className, ...props }) => (
-  <Image loading="lazy" height={height} width={width} src={src} className={className} {...props} />
-)
+export const LazyImage: React.FC<ImageProps> = ({
+  height,
+  width,
+  src,
+  className,
+  ...props
+}) => (
+  <Image
+    // loading="lazy"
+    height={height}
+    width={width}
+    src={src}
+    className={className}
+    placeholder="empty"
+    {...props}
+  />
+);
 
 export const StyledText = styled(Text)`
   line-height: 1.6;
-`
+`;

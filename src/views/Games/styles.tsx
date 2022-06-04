@@ -1,19 +1,20 @@
-import styled from 'styled-components'
-import { Image, Text } from 'fortcake-uikit-v2'
-import { Heading } from '../FortCakeHome/styles'
+import styled from "styled-components";
+import { Box, Text } from "fortcake-uikit-v2";
+// import Image from 'next/image'
+import { Heading } from "../FortCakeHome/styles";
 
 export const H2 = styled(Heading)`
   font-size: 1.6rem;
   line-height: 2.4rem;
-`
+`;
 
-export const LandingText = styled.div`
+export const LandingText = styled(Box)`
   ${({ theme }) => theme.mediaQueries.md} {
     flex-basis: 60%;
   }
-`
+`;
 
-export const ControlContainer = styled.div`
+export const ControlContainer = styled(Box)`
   display: flex;
   width: 100%;
   align-items: center;
@@ -29,14 +30,14 @@ export const ControlContainer = styled.div`
     padding: 16px 0 16px 32px;
     margin-bottom: 0;
   }
-`
-export const LabelWrapper = styled.div`
+`;
+export const LabelWrapper = styled(Box)`
   > ${Text} {
     font-size: 12px;
   }
-`
+`;
 
-export const FilterContainer = styled.div`
+export const FilterContainer = styled(Box)`
   display: flex;
   align-items: center;
   width: 100%;
@@ -46,9 +47,9 @@ export const FilterContainer = styled.div`
     width: auto;
     padding: 0;
   }
-`
+`;
 
-export const StyledImage = styled(Image)`
+export const ImageWrapper = styled(Box)`
   display: none;
   &.showOnMobile {
     display: flex;
@@ -59,4 +60,4 @@ export const StyledImage = styled(Image)`
   ${({ theme }) => theme.mediaQueries.md} {
     display: block;
   }
-`
+`;
