@@ -1,8 +1,7 @@
-import { Link } from 'react-router-dom'
-import styled from 'styled-components'
+import Link, { LinkProps } from "next/link";
+import styled from "styled-components";
 
-// An internal link from the react-router-dom library that is correctly styled
-const StyledInternalLink = styled(Link)`
+const StyledInternalLink = styled("a")`
   text-decoration: none;
   cursor: pointer;
   color: ${({ theme }) => theme.colors.primary};
@@ -20,6 +19,14 @@ const StyledInternalLink = styled(Link)`
   :active {
     text-decoration: none;
   }
-`
+`;
 
-export default StyledInternalLink
+const InternalLink: React.FC<LinkProps> = ({ children, ...props }) => {
+  return (
+    <Link {...props}>
+      <StyledInternalLink>{children}</StyledInternalLink>
+    </Link>
+  );
+};
+
+export default InternalLink;

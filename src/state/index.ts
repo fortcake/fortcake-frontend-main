@@ -37,7 +37,7 @@ import mint from "./mint/reducer";
 import lists, { initialState as listsInitialState } from "./lists/reducer";
 import burn from "./burn/reducer";
 import multicall from "./multicall/reducer";
-import nftMarketReducer from "./nftMarket/reducer";
+// import nftMarketReducer from "./nftMarket/reducer";
 
 const PERSISTED_KEYS: string[] = ["user", "transactions"];
 
@@ -83,7 +83,7 @@ const persistedReducer = persistReducer(
     // pools: poolsReducer,
     lottery: lotteryReducer,
     info: infoReducer,
-    nftMarket: nftMarketReducer,
+    // nftMarket: nftMarketReducer,
     games: gamesReducer,
     block: blockReducer,
 

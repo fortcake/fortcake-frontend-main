@@ -3,8 +3,7 @@ import styled from 'styled-components'
 import { Flex, Skeleton, UserMenuItem } from 'fortcake-uikit-v2'
 import { useWeb3React } from '@web3-react/core'
 import { useTranslation } from 'contexts/Localization'
-import history from 'routerHistory'
-import { nftsBaseUrl } from 'views/Nft/market/constants'
+// import history from 'routerHistory'
 
 interface ProfileUserMenuItemProps {
   isLoading: boolean
@@ -23,11 +22,13 @@ const ProfileUserMenuItem: React.FC<ProfileUserMenuItemProps> = ({ isLoading, ha
   const { t } = useTranslation()
 
   const handleClick = () => {
-    history.push(`${nftsBaseUrl}/profile/${account.toLowerCase()}/achievements`)
+    // history.push(`${nftsBaseUrl}/profile/${account.toLowerCase()}/achievements`)
+    return account
   }
 
   const handleNoProfileClick = () => {
-    history.push('/create-profile')
+    // history.push('/create-profile')
+    return null
   }
 
   if (isLoading) {

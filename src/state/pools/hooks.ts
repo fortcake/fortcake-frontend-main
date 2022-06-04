@@ -5,7 +5,7 @@ import { batch, useSelector } from 'react-redux'
 import { useAppDispatch } from 'state'
 import { useFastFresh, useSlowFresh } from 'hooks/useRefresh'
 import { BIG_ZERO } from 'utils/bigNumber'
-import { getAprData } from 'views/Pools/helpers'
+// import { getAprData } from 'views/Pools/helpers'
 import {
   fetchPoolsPublicDataAsync,
   fetchPoolsUserDataAsync,
@@ -216,7 +216,7 @@ export const useIfoWithApr = () => {
   const ifoPoolWithApr = useMemo(() => {
     const ifoPool = { ...poolZero }
     ifoPool.vaultKey = VaultKey.IfoPool
-    ifoPool.apr = getAprData(ifoPool, performanceFeeAsDecimal).apr
+    // ifoPool.apr = getAprData(ifoPool, performanceFeeAsDecimal).apr
     ifoPool.rawApr = poolZero.apr
     return ifoPool
   }, [performanceFeeAsDecimal, poolZero])
