@@ -78,7 +78,7 @@ const RoadMap = () => {
   return (
     <Container>
       <MainHq>
-        <img src={Hq.src} alt="Roadmap Logo" width={280} height={280} />
+        <img src={Hq.src} alt="Roadmap Logo" width={210} height={210} />
         <Line1 />
       </MainHq>
       {/* Q1 */}

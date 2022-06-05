@@ -1,31 +1,21 @@
-import React from "react";
-import Document, {
-  Html,
-  Head,
-  Main,
-  NextScript,
-  DocumentContext,
-  DocumentInitialProps,
-} from "next/document";
-import { ServerStyleSheet } from "styled-components";
-import { nodes } from "utils/getRpcUrl";
+import React from 'react'
+import Document, { Html, Head, Main, NextScript, DocumentContext, DocumentInitialProps } from 'next/document'
+import { ServerStyleSheet } from 'styled-components'
+import { nodes } from 'utils/getRpcUrl'
 
 export default class MyDocument extends Document {
-  static async getInitialProps(
-    ctx: DocumentContext
-  ): Promise<DocumentInitialProps> {
-    const sheet = new ServerStyleSheet();
-    const originalRenderPage = ctx.renderPage;
+  static async getInitialProps(ctx: DocumentContext): Promise<DocumentInitialProps> {
+    const sheet = new ServerStyleSheet()
+    const originalRenderPage = ctx.renderPage
 
     try {
       // eslint-disable-next-line no-param-reassign
       ctx.renderPage = () =>
         originalRenderPage({
-          enhanceApp: (App) => (props) =>
-            sheet.collectStyles(<App {...props} />),
-        });
+          enhanceApp: (App) => (props) => sheet.collectStyles(<App {...props} />),
+        })
 
-      const initialProps = await Document.getInitialProps(ctx);
+      const initialProps = await Document.getInitialProps(ctx)
       return {
         ...initialProps,
         styles: [
@@ -35,9 +25,9 @@ export default class MyDocument extends Document {
             {sheet.getStyleElement()}
           </React.Fragment>,
         ],
-      };
+      }
     } finally {
-      sheet.seal();
+      sheet.seal()
     }
   }
 
@@ -49,16 +39,10 @@ export default class MyDocument extends Document {
             <link key={node} rel="preconnect" href={node} />
           ))}
           {process.env.NEXT_PUBLIC_NODE_PRODUCTION && (
-            <link
-              rel="preconnect"
-              href={process.env.NEXT_PUBLIC_NODE_PRODUCTION}
-            />
+            <link rel="preconnect" href={process.env.NEXT_PUBLIC_NODE_PRODUCTION} />
           )}
           <link rel="preconnect" href="https://fonts.gstatic.com" />
-          <link
-            href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;600&amp;display=swap"
-            rel="stylesheet"
-          />
+          <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;600&amp;display=swap" rel="stylesheet" />
           <link rel="shortcut icon" href="/favicon.ico" />
           <link rel="apple-touch-icon" href="/logo.png" />
           <link rel="manifest" href="/manifest.json" />
@@ -77,6 +61,6 @@ export default class MyDocument extends Document {
           <div id="portal-root" />
         </body>
       </Html>
-    );
+    )
   }
 }

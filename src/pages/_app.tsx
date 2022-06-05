@@ -51,22 +51,27 @@ function MyApp(props: AppProps) {
     <>
       <Head>
         <meta
+          name="description"
+          content="FORTCAKE is a community driven crypto gaming platform built on the Binance Smart Chain. The goal is simple; introduce the world to PLAY-TO-EARN."
+        />
+        <meta
           name="viewport"
           content="width=device-width, initial-scale=1, maximum-scale=5, minimum-scale=1, viewport-fit=cover"
         />
+        <meta name="theme-color" content="#f18d9e" />
         <meta
-          name="description"
-          content="Cheaper and faster than Uniswap? Discover PancakeSwap, the leading DEX on BNB Smart Chain (BSC) with the best farms in DeFi and a lottery for CAKE."
+          name="twitter:image"
+          content="https://uploads-ssl.webflow.com/61c92e9a7277eb346ebc5846/61c92e9a7277ebe1d2bc58e4_6152a6202777e51341d66152%3A6173959e4184c1858af43bcf_fortcake-neonglow-v1.png"
         />
-        <meta name="theme-color" content="#1FC7D4" />
-        <meta name="twitter:image" content="https://pancakeswap.finance/images/hero.png" />
         <meta
           name="twitter:description"
-          content="The most popular AMM on BSC! Earn CAKE through yield farming or win it in the Lottery, then stake it in Syrup Pools to earn more tokens! Initial Farm Offerings (new token launch model pioneered by PancakeSwap), NFTs, and more, on a platform you can trust."
+          content="Find PLAY-TO-EARN games, Swap tokens, Earn rewards, Trade NFT's and Join our community! Featuring our most upvoted crypto games all in one place."
         />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="🥞 PancakeSwap - A next evolution DeFi exchange on BNB Smart Chain (BSC)" />
-        <title>Fortcake</title>
+        <meta
+          name="twitter:title"
+          content="🎂 FortCake - Find PLAY-TO-EARN games, Swap tokens, Earn rewards, Trade NFT's and Join our community! Featuring our most upvoted crypto games all in one place."
+        />
       </Head>
       <Providers store={store}>
         <Blocklist>
