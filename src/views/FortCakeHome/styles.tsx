@@ -278,6 +278,7 @@ export const LazyImage: React.FC<ImageProps> = ({
     width={width}
     src={src}
     className={className}
+    alt="Image"
     {...props}
   />
 );

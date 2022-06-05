@@ -7,15 +7,13 @@ import { BLOCKED_ADDRESSES } from "./config/constants";
 import ListsUpdater from "./state/lists/updater";
 import MulticallUpdater from "./state/multicall/updater";
 import TransactionUpdater from "./state/transactions/updater";
-// import App from './pages/App'
-// import Providers from './Providers'
 
 export function Updaters() {
   return (
     <>
-      {/* <ListsUpdater />
-      <TransactionUpdater /> */}
-      {/* <MulticallUpdater /> */}
+      <ListsUpdater />
+      <TransactionUpdater />
+      <MulticallUpdater />
     </>
   );
 }
@@ -60,15 +58,3 @@ export function Blocklist({ children }: { children: ReactNode }) {
 //     'cancelled',
 //   ],
 // })
-
-// ReactDOM.render(
-//   <React.StrictMode>
-//     <Blocklist>
-//       <Providers>
-//         <Updaters />
-//         <App />
-//       </Providers>
-//     </Blocklist>
-//   </React.StrictMode>,
-//   document.getElementById('root'),
-// )

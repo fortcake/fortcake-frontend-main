@@ -18,7 +18,7 @@ const useScrollOnRouteChange = () => {
 
     router.events.on('routeChangeStart', handleRouteChange)
     return () => router.events.off('routeChangeStart', handleRouteChange)
-  }, [])
+  }, [router.events])
 }
 
 export default useScrollOnRouteChange

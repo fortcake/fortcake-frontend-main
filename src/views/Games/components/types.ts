@@ -1,3 +1,4 @@
+// eslint-disable react-hooks/exhaustive-deps import/no-cycle
 import { Game } from 'state/types'
 
 export type TableProps = {

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import {
   Skeleton,
@@ -98,7 +98,7 @@ const Rating: React.FC<{ votes: number }> = ({ votes }) => {
 
   return (
     <Flex alignItems="center" justifyContent="flex-end" width={isMobile ? '100%' : ''}>
-      <Img src={ratingIcon} width={18} height={18} mr="8px" style={{ width: '18px' }} />
+      <Img src={ratingIcon} width={18} height={18} mr="8px" style={{ width: '18px' }} alt="fortcake-score"/>
       <Text color="text" fontSize="1" fontWeight="bold" as="h3">
         {votes} %
       </Text>
@@ -180,7 +180,7 @@ const Game: React.FunctionComponent<GameProps & { actionPanelOpen: boolean }> = 
               {imgLoading ? (
                 <Skeleton variant="circle" animation="waves" width={90} height={90} />
               ) : (
-                <Image image={base64} width={120} height={120} ml="10px" />
+                <Image image={base64} width={120} height={120} ml="10px" alt="Token Image"/>
               )}
             </TokenWrapper>
             <Flex flexDirection="column" alignItems="flex-end" style={{ width: '100%' }}>
@@ -246,7 +246,7 @@ const Game: React.FunctionComponent<GameProps & { actionPanelOpen: boolean }> = 
           {imgLoading ? (
             <Skeleton variant="circle" animation="waves" width={90} height={90} />
           ) : (
-            <Image image={base64} width={90} height={90} />
+            <Image image={base64} width={90} height={90} alt="Token Image"/>
           )}
         </TokenWrapper>
         <Flex justifyContent="space-between" style={{ width: '100%' }}>

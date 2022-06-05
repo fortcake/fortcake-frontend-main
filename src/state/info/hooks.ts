@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getUnixTime, startOfHour, Duration, sub } from 'date-fns'
 import { AppState, AppDispatch } from 'state'
 import { isAddress } from 'utils'
-import { Transaction } from 'state/info/types'
 import fetchPoolChartData from 'state/info/queries/pools/chartData'
 import fetchPoolTransactions from 'state/info/queries/pools/transactions'
 import fetchTokenChartData from 'state/info/queries/tokens/chartData'
@@ -25,7 +24,7 @@ import {
   updateTokenPriceData,
   updateTokenTransactions,
 } from './actions'
-import { ProtocolData, PoolData, TokenData, ChartEntry, PriceChartEntry } from './types'
+import { ProtocolData, PoolData, TokenData, ChartEntry, PriceChartEntry, Transaction } from './types'
 
 // Protocol hooks
 

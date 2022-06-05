@@ -4,7 +4,7 @@ import { Skeleton } from 'fortcake-uikit-v2'
 
 export interface EarnedProps {
   earnings: number
-  pid: number
+  pid?: number
 }
 
 interface EarnedPropsWithLoading extends EarnedProps {

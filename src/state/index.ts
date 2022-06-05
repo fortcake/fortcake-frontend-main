@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 // import { save, load } from 'redux-localstorage-simple'
 // import cloneDeep from 'lodash/cloneDeep'
@@ -28,13 +28,11 @@ import blockReducer from "./block";
 import lotteryReducer from "./lottery";
 import infoReducer from "./info";
 import { updateVersion } from "./global/actions";
-import user, { initialState as userInitialState } from "./user/reducer";
-import transactions, {
-  initialState as transactionsInitialState,
-} from "./transactions/reducer";
+import user from "./user/reducer";
+import transactions from "./transactions/reducer";
 import swap from "./swap/reducer";
 import mint from "./mint/reducer";
-import lists, { initialState as listsInitialState } from "./lists/reducer";
+import lists from "./lists/reducer";
 import burn from "./burn/reducer";
 import multicall from "./multicall/reducer";
 // import nftMarketReducer from "./nftMarket/reducer";

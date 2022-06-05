@@ -25,7 +25,7 @@ function scrollDirection(elem) {
   return isGoingUp
 }
 
-export default (ref: MutableRefObject<any>) => {
+const useInitUi =  (ref: MutableRefObject<any>) => {
   useEffect(() => {
     const root = document.getElementById('__next')
     const parent = root.lastChild.childNodes[1];
@@ -67,3 +67,5 @@ export default (ref: MutableRefObject<any>) => {
     }
   }, [ref])
 }
+
+export default useInitUi

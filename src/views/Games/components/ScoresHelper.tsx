@@ -27,7 +27,7 @@ const ChildWrapper = styled.div<{ text: string }>`
 const ImgWrapper = ({ src, text }: { src: string; text: string }) => (
   <Wrapper>
     <ChildWrapper text={text}>
-      <Image width={40} height={40} style={{ width: "38px" }} src={src} />
+      <Image width={40} height={40} style={{ width: "38px" }} src={src} alt={text} />
     </ChildWrapper>
   </Wrapper>
 );

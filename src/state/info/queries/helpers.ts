@@ -1,7 +1,6 @@
 import { ONE_DAY_UNIX, PCS_V2_START } from 'config/constants/info'
 import { getUnixTime } from 'date-fns'
-import { TransactionType } from 'state/info/types'
-import { ChartEntry } from '../types'
+import { TransactionType, ChartEntry } from 'state/info/types'
 import { MintResponse, SwapResponse, BurnResponse, TokenDayData, PairDayData, PancakeDayData } from './types'
 
 export const mapMints = (mint: MintResponse) => {
