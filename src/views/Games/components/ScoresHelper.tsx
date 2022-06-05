@@ -1,6 +1,6 @@
 import React from "react";
-import { Box, Text, Flex } from "fortcake-uikit-v2";
-import Image from "next/image";
+import { Box, Text, Flex, Image } from "fortcake-uikit-v2";
+// import Image from "next/image";
 import styled from "styled-components";
 import green from "assets/images/gamelist/greenfortcakesize.png";
 import orange from "assets/images/gamelist/orangefortcakesize.png";

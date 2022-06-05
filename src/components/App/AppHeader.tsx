@@ -8,7 +8,7 @@ import {
   ArrowBackIcon,
   NotificationDot,
 } from "fortcake-uikit-v2";
-import { NextLinkFromReactRouter as Link } from "components/NextLink";
+import Link from "components/NextLink";
 import { useExpertModeManager } from "state/user/hooks";
 import GlobalSettings from "components/Menu/GlobalSettings";
 import Transactions from "./Transactions";

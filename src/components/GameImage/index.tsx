@@ -9,6 +9,8 @@ interface TokenImageProps extends ImageProps {
   image: string
 }
 
-export const GameImage: React.FC<TokenImageProps> = ({ image, ...props }) => {
+const GameImage: React.FC<TokenImageProps> = ({ image, ...props }) => {
   return <UIKitTokenImage src={image} {...props} />
 }
+
+export default GameImage

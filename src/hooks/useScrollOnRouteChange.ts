@@ -1,10 +1,11 @@
 import { useEffect } from 'react'
-import history from 'routerHistory'
+import { useRouter } from 'next/router'
 
 const useScrollOnRouteChange = () => {
+  const router = useRouter()
   useEffect(() => {
-    const unlisten = history.listen((args) => {
-      if (args.hash === '') {
+    const handleRouteChange = () => {
+      if (!window.location.hash) {
         setTimeout(() => {
           window.scroll({
             top: 0,
@@ -13,9 +14,10 @@ const useScrollOnRouteChange = () => {
           })
         }, 50)
       }
-    })
+    }
 
-    return () => unlisten()
+    router.events.on('routeChangeStart', handleRouteChange)
+    return () => router.events.off('routeChangeStart', handleRouteChange)
   }, [])
 }
 

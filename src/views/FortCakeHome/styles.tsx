@@ -6,8 +6,9 @@ import {
   Link,
   LinkExternal,
   Text,
+  Image,
+  ImageProps
 } from "fortcake-uikit-v2";
-import Image, { ImageProps } from "next/image";
 import abstractBg from "assets/images/abstract.svg";
 
 export const Heading = styled(PancakeHeading)<{ override?: boolean }>`
@@ -272,12 +273,11 @@ export const LazyImage: React.FC<ImageProps> = ({
   ...props
 }) => (
   <Image
-    // loading="lazy"
+    loading="lazy"
     height={height}
     width={width}
     src={src}
     className={className}
-    placeholder="empty"
     {...props}
   />
 );

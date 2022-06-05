@@ -1,7 +1,7 @@
-import React from "react";
-import { useMatchBreakpoints } from "fortcake-uikit-v2";
-import Image from "next/image";
-import { Hq } from "./svgs";
+import React from 'react'
+import { useMatchBreakpoints } from 'fortcake-uikit-v2'
+// import img from "next/img";
+import { Hq } from './svgs'
 import {
   Container,
   MainWrapper,
@@ -14,17 +14,17 @@ import {
   Line2,
   RoadMapDone,
   RoadMapFuture,
-} from "./styles";
+} from './styles'
 
 const RoadMap = () => {
-  const { isDesktop } = useMatchBreakpoints();
+  const { isDesktop } = useMatchBreakpoints()
 
   if (!isDesktop) {
     return (
       <Container>
         <MainWrapper justifyContent="center">
           <MainHq>
-            <Image src={Hq.src} alt="Roadmap Logo" width={280} height={280} />
+            <img src={Hq.src} alt="Roadmap Logo" width={280} height={280} />
           </MainHq>
         </MainWrapper>
         <MainWrapper>
@@ -32,14 +32,8 @@ const RoadMap = () => {
         </MainWrapper>
         <MainWrapper className="first">
           <FlexListContainer>
-            <RoadMapDone
-              title="Q4 2021"
-              text="Finish platform specifications"
-            />
-            <RoadMapDone
-              title="Q4 2021"
-              text="Mobile and Desktop version finished"
-            />
+            <RoadMapDone title="Q4 2021" text="Finish platform specifications" />
+            <RoadMapDone title="Q4 2021" text="Mobile and Desktop version finished" />
             <RoadMapDone title="Q1 2022" text="Launch on blockchain" />
           </FlexListContainer>
         </MainWrapper>
@@ -47,36 +41,21 @@ const RoadMap = () => {
           <FlexListContainer flexDirection="row-reverse">
             <RoadMapDone title="Q1 2022" text="Launch growth team phase 1" />
             <RoadMapDone title="Q2 2022" text="Live feature launch" />
-            <RoadMapFuture
-              title="In Progress"
-              text="Community outreach program"
-            />
+            <RoadMapFuture title="In Progress" text="Community outreach program" />
           </FlexListContainer>
         </MainWrapper>
         <MainWrapper className="third">
           <FlexListContainer>
-            <RoadMapFuture
-              title="In Progress"
-              text="Begin user acquisition campaigns"
-            />
-            <RoadMapFuture
-              title="In Progress"
-              text="Partnerships with blockchain games"
-            />
+            <RoadMapFuture title="In Progress" text="Begin user acquisition campaigns" />
+            <RoadMapFuture title="In Progress" text="Partnerships with blockchain games" />
             <RoadMapFuture title="Q3 2022" text="Official platform launch" />
           </FlexListContainer>
         </MainWrapper>
         <MainWrapper className="fourth">
           <FlexListContainer flexDirection="row-reverse">
-            <RoadMapFuture
-              title="Q3 2022"
-              text="Start of marketing campaigns"
-            />
+            <RoadMapFuture title="Q3 2022" text="Start of marketing campaigns" />
             <RoadMapFuture title="Q3 2022" text="Influencer program launch" />
-            <RoadMapFuture
-              title="Q3 2022"
-              text="Community/ Application adjustments"
-            />
+            <RoadMapFuture title="Q3 2022" text="Community/ Application adjustments" />
           </FlexListContainer>
         </MainWrapper>
         <MainWrapper className="fifth">
@@ -87,22 +66,19 @@ const RoadMap = () => {
           </FlexListContainer>
         </MainWrapper>
         <MainWrapper className="sixth">
-          <FlexListContainer
-            className="hideExtendedShadow"
-            flexDirection="row-reverse"
-          >
+          <FlexListContainer className="hideExtendedShadow" flexDirection="row-reverse">
             <RoadMapFuture title="Q1 2023" text="Major exchange listing" />
             <RoadMapFuture title="Q1 2023" text="New features release #2" />
           </FlexListContainer>
         </MainWrapper>
       </Container>
-    );
+    )
   }
 
   return (
     <Container>
       <MainHq>
-        <Image src={Hq.src} alt="Roadmap Logo" width={280} height={280} />
+        <img src={Hq.src} alt="Roadmap Logo" width={280} height={280} />
         <Line1 />
       </MainHq>
       {/* Q1 */}
@@ -120,18 +96,9 @@ const RoadMap = () => {
         <FlexListContainer flexDirection="row-reverse">
           <RoadMapDone title="Q1 2022" text="Launch growth team phase 1" />
           <RoadMapDone title="Q2 2022" text="Live feature launch" />
-          <RoadMapFuture
-            title="In Progress"
-            text="Community outreach program"
-          />
-          <RoadMapFuture
-            title="In Progress"
-            text="Begin user acquisition campaigns"
-          />
-          <RoadMapFuture
-            title="In Progress"
-            text="Partnerships with blockchain games"
-          />
+          <RoadMapFuture title="In Progress" text="Community outreach program" />
+          <RoadMapFuture title="In Progress" text="Begin user acquisition campaigns" />
+          <RoadMapFuture title="In Progress" text="Partnerships with blockchain games" />
         </FlexListContainer>
       </MainWrapper>
       {/* Q3 */}
@@ -141,32 +108,22 @@ const RoadMap = () => {
           <RoadMapFuture title="Q3 2022" text="Official platform launch" />
           <RoadMapFuture title="Q3 2022" text="Start of marketing campaigns" />
           <RoadMapFuture title="Q3 2022" text="Influencer program launch" />
-          <RoadMapFuture
-            title="Q3 2022"
-            text="Community/ Application adjustments"
-          />
+          <RoadMapFuture title="Q3 2022" text="Community/ Application adjustments" />
           <RoadMapFuture title="Q3 2022" text="Growth team phase 2" />
         </FlexListContainer>
       </MainWrapper>
       {/* Q4 */}
       <MainWrapper className="lastWrapper">
-        <FlexListContainer
-          className="hideExtendedShadow"
-          flexDirection="row-reverse"
-        >
+        <FlexListContainer className="hideExtendedShadow" flexDirection="row-reverse">
           <RoadMapFuture title="Q4 2022" text="Exchange listing" />
           <RoadMapFuture title="Q4 2022" text="New features release #1" />
           <RoadMapFuture title="Q1 2023" text="Major exchange listing" />
-          <RoadMapFuture
-            className="last"
-            title="Q1 2023"
-            text="New features release #2"
-          />
+          <RoadMapFuture className="last" title="Q1 2023" text="New features release #2" />
         </FlexListContainer>
         <BorderBox className="q4" />
       </MainWrapper>
     </Container>
-  );
-};
+  )
+}
 
-export default RoadMap;
+export default RoadMap
