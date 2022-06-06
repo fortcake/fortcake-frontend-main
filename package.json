@@ -61,7 +61,7 @@
     "easymde": "^2.15.0",
     "ethers": "^5.5.2",
     "fast-json-stable-stringify": "^2.1.0",
-    "fortcake-uikit-v2": "fortcake/fortcake-uikit-v2#nextjs",
+    "fortcake-uikit-v2": "https://github.com/fortcake/fortcake-uikit-v2#nextjs",
     "graphql": "^15.5.0",
     "graphql-request": "^3.4.0",
     "js-cookie": "^2.2.1",

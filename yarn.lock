@@ -5789,7 +5789,7 @@ __metadata:
     eslint-plugin-lodash: ^7.4.0
     ethers: ^5.5.2
     fast-json-stable-stringify: ^2.1.0
-    fortcake-uikit-v2: "fortcake/fortcake-uikit-v2#nextjs"
+    fortcake-uikit-v2: "https://github.com/fortcake/fortcake-uikit-v2#nextjs"
     graphql: ^15.5.0
     graphql-request: ^3.4.0
     husky: ^7.0.0
@@ -5830,9 +5830,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"fortcake-uikit-v2@fortcake/fortcake-uikit-v2#nextjs":
+"fortcake-uikit-v2@https://github.com/fortcake/fortcake-uikit-v2#nextjs":
   version: 0.0.36
-  resolution: "fortcake-uikit-v2@https://github.com/fortcake/fortcake-uikit-v2.git#commit=fde5cbe5bfef82bb0d91a67b4de7d9e40ec6e2f6"
+  resolution: "fortcake-uikit-v2@https://github.com/fortcake/fortcake-uikit-v2.git#commit=ec4a50973be7cfc6b3c68d80a5629dc835577231"
   dependencies:
     "@popperjs/core": ^2.9.2
     "@types/styled-system": ^5.1.10
@@ -5843,7 +5843,7 @@ __metadata:
     react: ^17.0.1
     react-dom: ^17.0.1
     styled-components: ^5.2.3
-  checksum: ce92858513cb4cb44aa3df6549c0c9484e3d4a8f69527450abe9460712407cb313ea9435ea31ce16bc05146d0c5b9bb69f0b032d5d31779de13619a238719c7f
+  checksum: 1d7b3973ab54d6626597dc76594db085fa21b06bbe20591acc23cbbeff4466daedfec93958969a844ea98ffe12a690ade11437660e2c0dcebecfa935b8180db2
   languageName: node
   linkType: hard
 

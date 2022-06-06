@@ -96,11 +96,13 @@ export const FooterLinks: Array<FooterLinkType> = [
         label: 'Play',
         href: Links.GAMES,
         useRouterLink: true,
+        isExternal: false,
       },
       {
         label: 'Swap',
         href: Links.BNB,
         useRouterLink: true,
+        isExternal: false,
       },
       {
         label: 'Governance',
