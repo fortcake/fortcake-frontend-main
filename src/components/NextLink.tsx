@@ -16,12 +16,14 @@ const A = styled.a``
 /**
  * temporary solution for migrating React Router to Next.js Link
  */
-const NextLinkFromReactRouter = forwardRef<any, LinkProps>(({ to, replace, children, prefetch, ...props }, ref) => (
-  <NextLink href={to as string} replace={replace} passHref prefetch={prefetch}>
-    <A ref={ref} {...props}>
-      {children}
-    </A>
-  </NextLink>
-))
+const NextLinkFromReactRouter = forwardRef<any, LinkProps>(
+  ({ to, replace, children, prefetch, onClick, ...props }, ref) => (
+    <NextLink href={to as string} replace={replace} passHref prefetch={prefetch}>
+      <A ref={ref} {...props}  onClick={onClick}>
+        {children}
+      </A>
+    </NextLink>
+  ),
+)
 
 export default NextLinkFromReactRouter
