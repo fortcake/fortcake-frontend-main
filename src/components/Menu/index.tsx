@@ -82,7 +82,7 @@ export const CustomFooter = () => {
   const { currentLanguage, setLanguage, t } = useTranslation()
   return (
     <Footer
-      nextLink={(linkProps) => {
+      LinkComponent={(linkProps) => {
         return <Link to={linkProps.href} {...linkProps} prefetch={false} />
       }}
       items={FooterLinks(t)}
