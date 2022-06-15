@@ -11,29 +11,7 @@ const config = {
   compiler: {
     styledComponents: true,
   },
-  // experimental: {
-  //   scrollRestoration: true,
-  // },
   reactStrictMode: true,
-  images: {
-    domains: [''],
-  },
-  async rewrites() {
-    return [
-      {
-        source: '/info/token/:address',
-        destination: '/info/tokens/:address',
-      },
-      {
-        source: '/info/pool/:address',
-        destination: '/info/pools/:address',
-      },
-      {
-        source: '/info/pair/:address',
-        destination: '/info/pools/:address',
-      },
-    ]
-  },
   async headers() {
     return [
       {
@@ -89,6 +67,7 @@ const config = {
       },
     ]
   },
+  trailingSlash: true,
   typescript: {
     ignoreBuildErrors: true,
   },
