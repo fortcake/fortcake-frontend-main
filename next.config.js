@@ -67,7 +67,6 @@ const config = {
       },
     ]
   },
-  trailingSlash: true,
   typescript: {
     ignoreBuildErrors: true,
   },

@@ -147,7 +147,7 @@ const ActionPanel: React.FunctionComponent<ActionPanelProps> = ({ details, expan
           <Text className="header">Platform</Text>
           <Flex>
             {platform.map((p) => (
-              <PlatformIcon key={p} platform={p} />
+              <PlatformIcon key={p} platform={p} mr={platform.length > 1 ? 2 : 0} />
             ))}
           </Flex>
         </Box>
@@ -161,16 +161,24 @@ const ActionPanel: React.FunctionComponent<ActionPanelProps> = ({ details, expan
   )
 }
 
-const PlatformIcon = ({ platform }: { platform: string }) => {
+export const PlatformIcon = ({
+  platform,
+  width = 18,
+  mr = 0,
+}: {
+  platform: string
+  width?: number | string
+  mr?: number
+}) => {
   const { isDark } = useTheme()
 
   switch (platform) {
     case Platforms.WEB:
-      return <WebIcon height={18} fill={isDark ? darkColors.text : lightColors.text} mr={2} />
+      return <WebIcon width={width} fill={isDark ? darkColors.text : lightColors.text} mr={mr} />
     case Platforms.ANDROID:
-      return <AndroidIcon height={18} fill={isDark ? darkColors.text : lightColors.text} mr={2} />
+      return <AndroidIcon width={width} fill={isDark ? darkColors.text : lightColors.text} mr={mr} />
     default:
-      return <AppleIcon height={18} fill={isDark ? darkColors.text : lightColors.text} mr={2} />
+      return <AppleIcon width={width} fill={isDark ? darkColors.text : lightColors.text} mr={mr} />
   }
 }
 
