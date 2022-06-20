@@ -170,31 +170,27 @@ const Game = (props: Game) => {
 
 export default Game
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  const res = await fetch('https://api.fortcake.io/games')
-  const Games: Game[] = await res.json()
-  console.log({ Games })
-  const paths = Games.map((game) => {
-    const lowerCaps = game.title.toLowerCase()
-    return {
-      params: {
-        title: lowerCaps.replaceAll(' ', ''),
-      },
-    }
-  })
-
-  return {
-    paths,
-    fallback: false,
-  }
-}
-
 export const getStaticProps = async ({ params }) => {
   const { title } = params
   const res = await fetch('https://api.fortcake.io/games')
   const Games: Game[] = await res.json()
-  const props = Games.find((game) => game.title.toLowerCase().replaceAll(' ', '') === title)
+  const props = Games.find((game) => game.title.toLowerCase().replace(/ /g, '') === title)
   return {
     props,
+  }
+}
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const res = await fetch('https://api.fortcake.io/games')
+  const Games: Game[] = await res.json()
+  const paths = Games.map((game) => ({
+    params: {
+      title: game.title.toLowerCase().replace(/ /g, ''),
+    },
+  }))
+
+  return {
+    paths,
+    fallback: false,
   }
 }
