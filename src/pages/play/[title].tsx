@@ -1,26 +1,23 @@
 import React, { useEffect, useState } from 'react'
 import { GetStaticPaths } from 'next'
 import { Game } from 'state/types'
-import { Box, Button, Flex, Heading, Image as ImgComponent, Text } from 'fortcake-uikit-v2'
+import {
+  Box,
+  Button,
+  Flex,
+  Heading,
+  Image as ImgComponent,
+  Text,
+  TwitterIcon,
+  TelegramIcon,
+  DiscordIcon,
+} from 'fortcake-uikit-v2'
 import GameImage from 'components/GameImage'
 import { PlatformIcon } from 'views/Games/components/GameTable/Actions/ActionPanel'
 import styled from 'styled-components'
 import axios from 'axios'
-
-/* 
-address: "0x1633b7157e7638c4d6593436111bf125ee74703f"
-category: "Card Game"
-chain: "BNB"
-cta: "https://splinterlands.com/"
-discord: "https://discord.com/invite/splinterlands"
-logo: "https://dl.airtable.com/.attachments/9d116440ef02fd1b0c14d99aa1efc8e5/002e6aff/2022-04-2702.21.55.png?ts=1655721336&userId=usrYUVcuuWEh2nY0T&cs=f3b904cfdf8fffb2"
-platform: ['Web']
-subtitle: "Earn unique NFT cards online, from anywhere in the world. Splinterlands is a free to play blockchain trading card game."
-symbol: "SPS"
-title: "Splinterlands"
-twitter: "https://twitter.com/splinterlands"
-votes: 59.05
-*/
+import { useGames } from 'state/games/hooks'
+import Link from 'components/NextLink'
 
 const Banner = styled(Box)<{ bgImg?: string }>`
   min-height: 24vh;
@@ -56,12 +53,11 @@ const Image = styled(GameImage)`
   &::before {
     background-color: #000;
     border-color: #ccc;
+    border-width: 3px;
   }
 `
 
 const Card = styled(Flex)`
-  /* background: #333; */
-  width: min(33%, 200px);
   flex-direction: column;
   justify-content: flex-end;
   align-items: center;
@@ -69,16 +65,52 @@ const Card = styled(Flex)`
 
 const ContentWrapper = styled(Flex)`
   width: 100%;
+  flex-direction: column;
 `
 
 const DetailsWrapper = styled(Flex)`
-  justify-content: space-around;
-  /* gap: 40px; */
+  justify-content: space-between;
+  ${({ theme }) => theme.mediaQueries.sm} {
+    justify-content: space-evenly;
+  }
+`
+
+const SimilarGamesWrapper = styled(Flex)`
+  justify-content: 'flex-start';
+  flex-direction: column;
+  gap: 10px;
+  width: min(100%, 800px);
+  ${({ theme }) => theme.mediaQueries.sm} {
+    flex-direction: row;
+  }
+`
+
+const SimilarGames = styled(Flex)`
+  border: 1px solid #333;
+  background-color: #222;
+  align-content: center;
+  justify-content: center;
+  flex-direction: column;
+  border-radius: 10px;
+  min-height: 240px;
+  width: min(450px, 100%);
+  transition: all ease 0.2s;
+  &:hover {
+    background-color: transparent;
+  }
 `
 
 const Game = (props: Game) => {
-  const { platform, symbol, category, logo, title, subtitle, votes } = props
+  const { platform, symbol, category, logo, title, subtitle, votes, discord, telegram, twitter } = props
   const [base64, setBase64] = useState('data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=')
+  const { data } = useGames()
+  const [similarGames, setSimilarGames] = useState([] as typeof data)
+
+  useEffect(() => {
+    let games = data.filter((game) => game.title !== title && game.category === category)
+    games = games.length > 4 ? games.splice(0, 4) : games
+    setSimilarGames(games)
+  }, [data, category, title])
 
   useEffect(() => {
     const controller = new AbortController()
@@ -113,33 +145,66 @@ const Game = (props: Game) => {
         <Heading scale="xl" textAlign="center" mt={40}>
           {title}
         </Heading>
-        <ContentWrapper mt={10} flexDirection="column">
+        <ContentWrapper mt={10}>
           <Button variant="light" scale="xs" style={{ marginInline: 'auto' }}>
             {category}
           </Button>
-          {/* <Text textAlign="center">{category}</Text> */}
           <DetailsWrapper mt={50}>
             <Card>
-              <Heading scale="lg">{symbol}</Heading>
-              <Text fontSize="14px">Currency</Text>
+              <Heading height="30px" scale="lg">
+                {symbol}
+              </Heading>
+              <Text py={1} fontSize="14px">
+                Currency
+              </Text>
             </Card>
             <Card>
-              <Flex>
+              <Flex height="30px">
                 {platform.map((p) => (
-                  <PlatformIcon key={p} platform={p} width="32px" mr={platform.length > 1 ? 2 : 0} />
+                  <PlatformIcon key={p} platform={p} width="21px" mr={platform.length > 1 ? 2 : 0} />
                 ))}
               </Flex>
-              <Text fontSize="14px">Platform</Text>
+              <Text py={1} fontSize="14px">
+                Platform
+              </Text>
             </Card>
             <Card>
-              <Heading scale="lg">{votes} %</Heading>
-              <Text fontSize="14px">Votes</Text>
+              <Heading height="30px" scale="lg">
+                {votes} %
+              </Heading>
+              <Text py={1} fontSize="14px">
+                Votes
+              </Text>
+            </Card>
+            <Card>
+              <Flex height="30px">
+                {twitter && (
+                  <a href={twitter} target="_blank" rel="noreferrer">
+                    <TwitterIcon height={21} mr={2} />
+                  </a>
+                )}
+                {telegram && (
+                  <a href={telegram} target="_blank" rel="noreferrer">
+                    <TelegramIcon height={21} mr={2} />
+                  </a>
+                )}
+                {discord && (
+                  <a href={discord} target="_blank" rel="noreferrer">
+                    <DiscordIcon height={21} mr={2} />
+                  </a>
+                )}
+              </Flex>
+              <Text py={1} fontSize="14px">
+                Socials
+              </Text>
             </Card>
           </DetailsWrapper>
         </ContentWrapper>
-        <Box mt={80}>
+        <ContentWrapper mt={80}>
           <Box>
-            <Heading scale="md">{subtitle}</Heading>
+            <Heading scale="md" style={{ lineHeight: '1.8rem' }}>
+              {subtitle}
+            </Heading>
           </Box>
           <Box mt={80} width="100%">
             <Heading scale="lg" textAlign="left">
@@ -152,16 +217,23 @@ const Game = (props: Game) => {
               <ImgComponent src="https://via.placeholder.com/240x240.png" alt="" height={240} width={240} />
             </Flex>
           </Box>
-        </Box>
+        </ContentWrapper>
         <Box mt={120} width="100%">
           <Heading scale="lg" textAlign="left">
             Similar Games
           </Heading>
-          <Flex style={{ gap: 4 }} justifyContent="space-between" mt={10}>
-            <ImgComponent src="https://via.placeholder.com/240x240.png" alt="" height={240} width={240} />
-            <ImgComponent src="https://via.placeholder.com/240x240.png" alt="" height={240} width={240} />
-            <ImgComponent src="https://via.placeholder.com/240x240.png" alt="" height={240} width={240} />
-          </Flex>
+          <SimilarGamesWrapper mt={20}>
+            {similarGames.map((cat) => (
+              <SimilarGames key={cat.title} p={2}>
+                <Link to={`/play/${cat.title.toLowerCase().replace(/ /g, '')}`} style={{ width: '100%' }}>
+                  <ImgComponent src={cat.logo} alt="" height={180} width={180} mx="auto" />
+                  {/* <Heading style={{ fontSize: '16px' }} textAlign="center" py={2}>
+                    {cat.title}
+                  </Heading> */}
+                </Link>
+              </SimilarGames>
+            ))}
+          </SimilarGamesWrapper>
         </Box>
       </Container>
     </Box>
